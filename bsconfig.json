@@ -1,0 +1,21 @@
+{
+  "name": "react-from-svg",
+  "namespace": true,
+  "refmt": 3,
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "ppx-flags": [
+    "./node_modules/reason-react/_build/default/jsx_ppx/reactjs_jsx_ppx_v3.exe"
+  ],
+  "bsc-flags": ["-bs-super-errors"],
+  "bs-dependencies": ["reason-future", "reason-react"]
+}
