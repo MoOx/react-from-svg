@@ -1,6 +1,6 @@
 {
   "name": "react-from-svg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "keywords": [
@@ -26,12 +26,12 @@
     "bsconfig.json"
   ],
   "scripts": {
+    "postinstall": "bsb -clean-world -make-world",
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "svg": "trash test/components && ./bin.js test test/components && yarn svg:format",
-    "test": "yarn re:build && yarn svg",
-    "prepare": "yarn re:clean && yarn re:build"
+    "test": "yarn re:build && yarn svg"
   },
   "dependencies": {
     "bs-platform": "^5.0.0",
