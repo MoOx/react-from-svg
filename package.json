@@ -1,6 +1,6 @@
 {
   "name": "react-from-svg",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "keywords": [
@@ -37,11 +37,11 @@
     "bs-platform": "^5.0.0",
     "glob": "^7.1.3",
     "mkdirp": "^0.5.1",
-    "reason-future": "^2.4.0"
+    "reason-future": "^2.4.0",
+    "reason-react": "https://github.com/reasonml/reason-react.git#0.7.0"
   },
   "devDependencies": {
     "npmpub": "^4.1.0",
-    "reason-react": "https://github.com/reasonml/reason-react.git#0.7.0",
     "trash-cli": "^1.4.0"
   }
 }
