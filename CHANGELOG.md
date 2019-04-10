@@ -1,3 +1,7 @@
+# 0.1.3 - 2019-04-10
+
+bs-platform 5.0.1 & reason-react 0.7.0
+
 # 0.1.2 - 2019-04-09
 
 Add dep (unused in production) to fit development bsconfig that is the same for production

@@ -98,10 +98,10 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-bs-platform@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.0.tgz#f9fded818bafc3891aeb85eb4e0d95b8d8f8b4d7"
-  integrity sha512-zxLobdIaf/r7go47hOgxcd6C0ANh7MYMEtZNb9Al7JdoekzFZI50F4GpZpP8kMh9Z+M5PoPE1WuryT4S8mT8Kg==
+bs-platform@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.1.tgz#0e7a50a1b51896d3ff4e1df6e79d32530ba062f5"
+  integrity sha512-k3b0G9JIlavtooyQukQNCyhnE6p400vR4Nx3pdKwQpo4xlnOrUOeHV+9TBj/XAuSRRDOOgw2H57iGTCPpLxjMg==
 
 camelcase-keys@^2.0.0:
   version "2.1.0"
@@ -975,9 +975,10 @@ reason-future@^2.4.0:
   resolved "https://registry.yarnpkg.com/reason-future/-/reason-future-2.4.0.tgz#3918945a943a6abbb67bc62e90af6a65a0f079ae"
   integrity sha512-QtWvUqzfPTxZpB4sWjAS3bFqCB76Lsxm6ekd99LF8iXkLqx2Xg+b9wyobW/KoXMrq48B//hvW3Dh3vhIYlpXHQ==
 
-"reason-react@https://github.com/reasonml/reason-react.git#0.7.0":
+reason-react@^0.7.0:
   version "0.7.0"
-  resolved "https://github.com/reasonml/reason-react.git#6a854ec23699204d8f6b95a333b59ab765e59c80"
+  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.7.0.tgz#46a975c321e81cd51310d7b1a02418ca7667b0d6"
+  integrity sha512-czR/f0lY5iyLCki9gwftOFF5Zs40l7ZSFmpGK/Z6hx2jBVeFDmIiXB8bAQW/cO6IvtuEt97OmsYueiuOYG9XjQ==
   dependencies:
     react ">=16.8.1"
     react-dom ">=16.8.1"
