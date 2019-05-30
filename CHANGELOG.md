@@ -1,3 +1,7 @@
+# 0.2.0 - 2019-05-30
+
+Remove `[@bs.config {jsx: 3}];`
+
 # 0.1.3 - 2019-04-10
 
 bs-platform 5.0.1 & reason-react 0.7.0
