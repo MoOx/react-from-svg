@@ -1,5 +1,11 @@
 # Changelog of `react-from-svg`
 
+## 1.1.0 - 2019-12-21
+
+Ooopsy :)
+Tons of fixes so it's usable.
+And `dp` unit
+
 ## 1.0.0 - 2019-12-21
 
 Support for
