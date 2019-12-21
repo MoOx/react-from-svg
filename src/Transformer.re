@@ -216,10 +216,10 @@ let write = (outputPath, files) => {
 let writeRe = (outputPath, files) => {
   files->Array.forEach(file => {
     let filename = file.name;
-    let pathname = Path.join([|outputPath, "SVG" ++ file.name ++ ".re"|]);
+    let pathname = Path.join([|outputPath, {j|SVG$filename.re|j}|]);
     mkdirpSync(Path.dirname(pathname));
     let reWrapper = {j|
-[@react.component] [@bs.module "./$filename.js"]
+[@react.component] [@bs.module "./SVG$filename.js"]
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
