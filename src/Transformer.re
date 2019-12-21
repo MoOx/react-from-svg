@@ -158,7 +158,7 @@ let transformSvg = svg => {
     |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z");
 
   Some(
-    {j|
+    {j|import React from 'react';
 import Svg, {
   Circle,
   Ellipse,
