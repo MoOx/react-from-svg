@@ -1,6 +1,6 @@
 {
   "name": "react-from-svg",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "keywords": [
@@ -31,7 +31,8 @@
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "svg": "trash test/components && ./bin.js test test/components && yarn svg:format",
-    "test": "yarn re:build && yarn svg"
+    "test": "yarn re:build && yarn svg",
+    "release": "npmpub"
   },
   "dependencies": {
     "bs-platform": "^5.0.1",
@@ -41,7 +42,7 @@
     "reason-react": "^0.7.0"
   },
   "devDependencies": {
-    "npmpub": "^4.1.0",
+    "npmpub": "^5.0.0",
     "trash-cli": "^1.4.0"
   }
 }
