@@ -1,6 +1,17 @@
 # Changelog of `react-from-svg`
 
-## 0.2.1 - 2019-12-12
+## 1.0.0 - 2019-12-21
+
+Support for
+
+- React Native
+- React Native Web
+- Reason React Native
+- Reason React Native Web
+
+Via react-native-svg
+
+## 0.2.1 - 2019-12-21
 
 🥳 Fixes
 
