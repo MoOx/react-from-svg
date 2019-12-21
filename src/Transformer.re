@@ -34,7 +34,6 @@ let shortenFilenames = (sourcePath, files) => {
   );
 };
 
-// web only for now
 let transformSvg = svg => {
   let transformedSvg =
     svg
@@ -48,9 +47,30 @@ let transformSvg = svg => {
          [%re "/\\sxmlns:xlink=\"http:\\/\\/www.w3.org\\/1999\\/xlink\"/g"],
          "",
        )
+    // remove useless data
     |> Js.String.replaceByRe([%re "/\\s<title>(.*)<\\/title>/g"], "")
     |> Js.String.replaceByRe([%re "/\\s<desc>(.*)<\\/desc>/g"], "")
     |> Js.String.replaceByRe([%re "/\\s<!--(.*)-->/g"], "")
+    //
+    // |> Js.String.replaceByRe([%re "/\"\\//g"], {j|" /|j})
+    // add space between jsx element?
+    // |> Js.String.replaceByRe([%re "/></g"], {j|> <|j})
+    // remove future props
+    |> Js.String.replaceByRe(
+         [%re "/<svg\\s?(.*)?\\s?width=\"[^\\\"]*\"/g"],
+         {j|<svg \$1|j},
+       )
+    |> Js.String.replaceByRe(
+         [%re "/<svg\\s?(.*)?\\s?height=\"[^\\\"]*\"/g"],
+         {j|<svg \$1|j},
+       )
+    |> Js.String.replaceByRe(
+         [%re "/<svg\\s?(.*)?\\s?fill=\"[^\\\"]*\"/g"],
+         {j|<svg \$1|j},
+       )
+    // inject props
+    |> Js.String.replace(">", " width={width} height={height} fill={fill}>")
+    // case for react-native-svg
     |> Js.String.replaceByRe(
          [%re "/\\s([a-z]+)-a([a-z]+)/g"],
          {j| \$1A\$2|j},
@@ -111,35 +131,63 @@ let transformSvg = svg => {
          [%re "/\\s([a-z]+)-w([a-z]+)/g"],
          {j| \$1W\$2|j},
        )
-    |> Js.String.replaceByRe([%re "/\"\\//g"], {j|" /|j})
-    |> Js.String.replaceByRe([%re "/></g"], {j|> <|j})
-    // remove future props
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?width=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?height=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?fill=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    // inject props
-    |> Js.String.replace(">", "?width ?height ?fill>");
+    |> Js.String.replaceByRe([%re "/<(\\/?)a/g"], "<$1A")
+    |> Js.String.replaceByRe([%re "/<(\\/?)b/g"], "<$1B")
+    |> Js.String.replaceByRe([%re "/<(\\/?)c/g"], "<$1C")
+    |> Js.String.replaceByRe([%re "/<(\\/?)d/g"], "<$1D")
+    |> Js.String.replaceByRe([%re "/<(\\/?)e/g"], "<$1E")
+    |> Js.String.replaceByRe([%re "/<(\\/?)f/g"], "<$1F")
+    |> Js.String.replaceByRe([%re "/<(\\/?)g/g"], "<$1G")
+    |> Js.String.replaceByRe([%re "/<(\\/?)h/g"], "<$1H")
+    |> Js.String.replaceByRe([%re "/<(\\/?)i/g"], "<$1I")
+    |> Js.String.replaceByRe([%re "/<(\\/?)j/g"], "<$1J")
+    |> Js.String.replaceByRe([%re "/<(\\/?)k/g"], "<$1K")
+    |> Js.String.replaceByRe([%re "/<(\\/?)l/g"], "<$1L")
+    |> Js.String.replaceByRe([%re "/<(\\/?)m/g"], "<$1M")
+    |> Js.String.replaceByRe([%re "/<(\\/?)o/g"], "<$1O")
+    |> Js.String.replaceByRe([%re "/<(\\/?)p/g"], "<$1P")
+    |> Js.String.replaceByRe([%re "/<(\\/?)q/g"], "<$1Q")
+    |> Js.String.replaceByRe([%re "/<(\\/?)r/g"], "<$1R")
+    |> Js.String.replaceByRe([%re "/<(\\/?)s/g"], "<$1S")
+    |> Js.String.replaceByRe([%re "/<(\\/?)t/g"], "<$1T")
+    |> Js.String.replaceByRe([%re "/<(\\/?)u/g"], "<$1U")
+    |> Js.String.replaceByRe([%re "/<(\\/?)v/g"], "<$1V")
+    |> Js.String.replaceByRe([%re "/<(\\/?)w/g"], "<$1W")
+    |> Js.String.replaceByRe([%re "/<(\\/?)x/g"], "<$1X")
+    |> Js.String.replaceByRe([%re "/<(\\/?)y/g"], "<$1Y")
+    |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z");
 
   Some(
     {j|
-[@react.component]
-let make =
-  (
-    ~width: option(ReactFromSvg.Size.t)=?,
-    ~height: option(ReactFromSvg.Size.t)=?,
-    ~fill: option(ReactFromSvg.Size.t)=?
-  ) => {
+import Svg, {
+  Circle,
+  Ellipse,
+  G,
+  Text,
+  TSpan,
+  TextPath,
+  Path,
+  Polygon,
+  Polyline,
+  Line,
+  Rect,
+  Use,
+  Image,
+  Symbol,
+  Defs,
+  LinearGradient,
+  RadialGradient,
+  Stop,
+  ClipPath,
+  Pattern,
+  Mask,
+} from 'react-native-svg';
+
+export default ({width, height, fill}) => {
+  return (
 $transformedSvg
-  };
+  );
+};
 |j},
   );
 };
@@ -158,21 +206,51 @@ let transform = files => {
 
 let write = (outputPath, files) => {
   files->Array.forEach(file => {
-    let filename = Path.join([|outputPath, "SVG" ++ file.name ++ ".re"|]);
+    let filename = Path.join([|outputPath, "SVG" ++ file.name ++ ".js"|]);
     mkdirpSync(Path.dirname(filename));
     Fs.writeFileAsUtf8Sync(filename, file.content);
   });
   files;
 };
 
-let make = (sourcePath, outputPath) => {
-  Path.join([|sourcePath, "*.svg"|])
-  ->get
-  ->Future.map(files => files->Result.getExn)
-  ->Future.tap(files => Js.log2("Files found", files->Array.length))
-  ->Future.map(shortenFilenames(sourcePath))
-  ->Future.map(transform)
-  ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
-  ->Future.map(write(outputPath))
-  ->Future.tap(files => Js.log2("Files written", files->Array.length));
+let writeRe = (outputPath, files) => {
+  files->Array.forEach(file => {
+    let filename = file.name;
+    let pathname = Path.join([|outputPath, "SVG" ++ file.name ++ ".re"|]);
+    mkdirpSync(Path.dirname(pathname));
+    let reWrapper = {j|
+[@react.component] [@bs.module "./$filename.js"]
+external make: (
+  ~width: option(ReactFromSvg.Size.t)=?,
+  ~height: option(ReactFromSvg.Size.t)=?,
+  ~fill: option(ReactFromSvg.Size.t)=?
+) => React.element  = "default";
+|j};
+    Fs.writeFileAsUtf8Sync(pathname, reWrapper);
+  });
+  files;
+};
+
+let make = (sourcePath, outputPath, reason) => {
+  let futureFiles =
+    Path.join([|sourcePath, "*.svg"|])
+    ->get
+    ->Future.map(files => files->Result.getExn)
+    ->Future.tap(files => Js.log2("Files found", files->Array.length))
+    ->Future.map(shortenFilenames(sourcePath))
+    ->Future.map(transform)
+    ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
+    ->Future.map(write(outputPath))
+    ->Future.tap(files => Js.log2("Files written", files->Array.length));
+
+  if (reason) {
+    futureFiles
+    ->Future.map(writeRe(outputPath))
+    ->Future.tap(files =>
+        Js.log2("Files written (reason wrappers)", files->Array.length)
+      )
+    ->ignore;
+  };
+
+  futureFiles;
 };

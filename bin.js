@@ -5,6 +5,7 @@ args.shift(); // node
 args.shift(); // bin name
 const sourcePath = args.shift();
 const outputPath = args.shift();
+const lastArg = args.shift();
 
 if (!sourcePath) {
   throw new Error("source path is required");
@@ -12,5 +13,8 @@ if (!sourcePath) {
 if (!outputPath) {
   throw new Error("output path is required");
 }
+if (lastArg !== undefined && lastArg!=="--with-reason") {
+  throw new Error("only accepted option is --with-reason");
+}
 
-require("./src/Transformer.bs.js").make(sourcePath, outputPath);
+require("./src/Transformer.bs.js").make(sourcePath, outputPath, Boolean(lastArg));

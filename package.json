@@ -30,7 +30,7 @@
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "svg": "trash test/components && ./bin.js test test/components && yarn svg:format",
+    "svg": "trash test/components && ./bin.js test test/components --with-reason && yarn svg:format",
     "test": "yarn re:build && yarn svg",
     "release": "npmpub"
   },
