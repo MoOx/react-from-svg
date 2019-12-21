@@ -4,5 +4,8 @@ let pctString = num => num->Js.Float.toString ++ "0%";
 
 type t = string;
 
-external pt: float => t = "%identity";
+[@deprecated "Use `dp` instead"] external pt: float => t = "%identity";
+
+external dp: float => t = "%identity";
+
 let pct: float => t = pctString->Obj.magic;
