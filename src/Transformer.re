@@ -38,6 +38,8 @@ let shortenFilenames = (sourcePath, files) => {
 let transformSvg = svg => {
   let transformedSvg =
     svg
+    |> Js.String.replaceByRe([%re "/\sversion=\"1.1\"/g"], "")
+    |> Js.String.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "")
     |> Js.String.replaceByRe(
          [%re "/\sxmlns\=\"http:\/\/www\.w3\.org\/2000\/svg\"/g"],
          "",
@@ -46,7 +48,24 @@ let transformSvg = svg => {
          [%re "/\sxmlns:xlink\=\"http:\/\/www.w3.org\/1999\/xlink\"/g"],
          "",
        )
-    |> Js.String.replaceByRe([%re "/\sfill-rule=\"/g"], {j| fillRule="|j})
+    |> Js.String.replaceByRe([%re "/\s<title>(.*)<\/title>/g"], "")
+    |> Js.String.replaceByRe([%re "/\s<desc>(.*)<\/desc>/g"], "")
+    |> Js.String.replaceByRe([%re "/\s<!--(.*)-->/g"], "")
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-a([a-z]+)/g"], {j| \$1A\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-b([a-z]+)/g"], {j| \$1B\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-c([a-z]+)/g"], {j| \$1C\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-d([a-z]+)/g"], {j| \$1D\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-e([a-z]+)/g"], {j| \$1E\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-f([a-z]+)/g"], {j| \$1F\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-g([a-z]+)/g"], {j| \$1G\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-h([a-z]+)/g"], {j| \$1H\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-l([a-z]+)/g"], {j| \$1M\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-o([a-z]+)/g"], {j| \$1O\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-p([a-z]+)/g"], {j| \$1P\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-s([a-z]+)/g"], {j| \$1S\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-t([a-z]+)/g"], {j| \$1T\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-r([a-z]+)/g"], {j| \$1R\$2|j})
+    |> Js.String.replaceByRe([%re "/\s([a-z]+)-w([a-z]+)/g"], {j| \$1W\$2|j})
     |> Js.String.replaceByRe([%re "/\"\//g"], {j|" /|j})
     |> Js.String.replaceByRe([%re "/></g"], {j|> <|j})
     // remove future props
