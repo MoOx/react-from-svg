@@ -221,9 +221,9 @@ let writeRe = (outputPath, files) => {
     let reWrapper = {j|
 [@react.component] [@bs.module "./$filename.js"]
 external make: (
-  ~width: option(ReactFromSvg.Size.t)=?,
-  ~height: option(ReactFromSvg.Size.t)=?,
-  ~fill: option(ReactFromSvg.Size.t)=?
+  ~width: ReactFromSvg.Size.t=?,
+  ~height: ReactFromSvg.Size.t=?,
+  ~fill: ReactFromSvg.Size.t=?
 ) => React.element  = "default";
 |j};
     Fs.writeFileAsUtf8Sync(pathname, reWrapper);
