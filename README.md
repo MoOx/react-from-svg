@@ -8,15 +8,15 @@
 ## Usage
 
 ```console
-react-from-svg [sourcePath] [outputPath] [--with-reason]
+react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill]
 ```
 
 ### Examples
 
-Just React Native / React Native Web SVGs
+Just React Native / React Native Web SVGs, with fill svg props removed, nice for icons
 
 ```console
-react-from-svg assets/svgs src/Svgs 
+react-from-svg assets/svgs src/Svgs --remove-fill
 ```
 
 React Native (Web) + ReasonML bindings SVGs

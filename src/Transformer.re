@@ -34,7 +34,7 @@ let shortenFilenames = (sourcePath, files) => {
   );
 };
 
-let transformSvg = svg => {
+let transformSvg = (svg, removeFill) => {
   let transformedSvg =
     svg
     |> Js.String.replaceByRe([%re "/\\sversion=\"1.1\"/g"], "")
@@ -157,6 +157,13 @@ let transformSvg = svg => {
     |> Js.String.replaceByRe([%re "/<(\\/?)y/g"], "<$1Y")
     |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z");
 
+  let transformedSvgCleaned =
+    if (!removeFill) {
+      transformedSvg;
+    } else {
+      transformedSvg
+      |> Js.String.replaceByRe([%re "/ fill=\"[^\\\"]*\"/g"], "");
+    };
   Some(
     {j|import React from 'react';
 import Svg, {
@@ -185,18 +192,18 @@ import Svg, {
 
 export default ({width, height, fill}) => {
   return (
-$transformedSvg
+$transformedSvgCleaned
   );
 };
 |j},
   );
 };
 
-let transform = files => {
+let transform = (files, removeFill) => {
   let f =
     files->Array.reduce([||], (files, file) =>
       file.content
-      ->transformSvg
+      ->transformSvg(removeFill)
       ->Option.map(content => files->Array.concat([|{...file, content}|]))
       ->Option.getWithDefault(files)
     );
@@ -231,14 +238,14 @@ external make: (
   files;
 };
 
-let make = (sourcePath, outputPath, reason) => {
+let make = (sourcePath, outputPath, reason, removeFill) => {
   let futureFiles =
     Path.join([|sourcePath, "*.svg"|])
     ->get
     ->Future.map(files => files->Result.getExn)
     ->Future.tap(files => Js.log2("Files found", files->Array.length))
     ->Future.map(shortenFilenames(sourcePath))
-    ->Future.map(transform)
+    ->Future.map(files => transform(files, removeFill))
     ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
     ->Future.map(write(outputPath))
     ->Future.tap(files => Js.log2("Files written", files->Array.length));
