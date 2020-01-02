@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 1.2.1 - 2020-01-01
+
+- Fix `pct` unit
+
 ## 1.2.0 - 2019-12-23
 
 Add `--remove-fill` option
