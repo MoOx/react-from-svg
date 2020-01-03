@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 1.2.3 - 2020-01-03
+
+- Fix unwanted whitespace that create text nodes
+
 ## 1.2.2 - 2020-01-03
 
 - Fix removal of `<?xml` header without encoding
