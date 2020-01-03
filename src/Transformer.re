@@ -48,9 +48,9 @@ let transformSvg = (svg, removeFill) => {
          "",
        )
     // remove useless data
-    |> Js.String.replaceByRe([%re "/\\s<title>(.*)<\\/title>/g"], "")
-    |> Js.String.replaceByRe([%re "/\\s<desc>(.*)<\\/desc>/g"], "")
-    |> Js.String.replaceByRe([%re "/\\s<!--(.*)-->/g"], "")
+    |> Js.String.replaceByRe([%re "/<title>(.*)<\\/title>/g"], "")
+    |> Js.String.replaceByRe([%re "/<desc>(.*)<\\/desc>/g"], "")
+    |> Js.String.replaceByRe([%re "/<!--(.*)-->/g"], "")
     //
     // |> Js.String.replaceByRe([%re "/\"\\//g"], {j|" /|j})
     // add space between jsx element?
@@ -155,7 +155,8 @@ let transformSvg = (svg, removeFill) => {
     |> Js.String.replaceByRe([%re "/<(\\/?)w/g"], "<$1W")
     |> Js.String.replaceByRe([%re "/<(\\/?)x/g"], "<$1X")
     |> Js.String.replaceByRe([%re "/<(\\/?)y/g"], "<$1Y")
-    |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z");
+    |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z")
+    |> Js.String.replaceByRe([%re "/>\\s+</g"], "><");
 
   let transformedSvgCleaned =
     if (!removeFill) {
