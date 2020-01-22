@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 2.0.1 - 2020-01-22
+
+- Try to autorebuild if compiled artifacts are missing
+
 ## 2.0.0 - 2020-01-22
 
 - Try to load compiled transformer differently (not in-source as it's the recommended place - to avoid issue with existing bs compilation, which can override & break nodejs script due to not using commonjs).
