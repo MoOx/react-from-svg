@@ -35,11 +35,11 @@
     "svg:--with-reason": "trash test/components && ./bin.js test test/components --with-reason && yarn svg:format",
     "svg:--all": "trash test/components && ./bin.js test test/components --with-reason --remove-fill && yarn svg:format",
     "svg:--all2": "trash test/components && ./bin.js test test/components --remove-fill --with-reason  && yarn svg:format",
-    "test": "yarn re:build && yarn svg:--nothing && yarn svg:--remove-fill && yarn svg:--with-reason && yarn svg:--all && yarn svg:--all2",
+    "test": "yarn re:clean && yarn re:build && yarn svg:--nothing && yarn svg:--remove-fill && yarn svg:--with-reason && yarn svg:--all && yarn svg:--all2",
     "release": "npmpub"
   },
   "dependencies": {
-    "bs-platform": "^5.0.1",
+    "bs-platform": "^7.0.0",
     "glob": "^7.1.3",
     "mkdirp": "^0.5.1",
     "reason-future": "^2.4.0",

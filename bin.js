@@ -18,4 +18,12 @@ if (args.filter(arg => !acceptedOptions.includes(arg)).length > 0) {
   throw new Error("only accepted options are: "+acceptedOptions);
 }
 
-require("./src/Transformer.bs.js").make(sourcePath, outputPath, args.includes("--with-reason"), args.includes("--remove-fill"));
+let transformer;
+try {
+  transformer = require("./lib/js/src/Transformer.bs.js")
+}
+catch(e) {
+  throw new Error("react-from-svg: impossible to get compiled Transformer module compiled from bs. Try reinstalling your dependencies or open an issue with as much as information as you can (bsconfig, etc) https://github.com/MoOx/react-from-svg/issues/new");
+}
+
+transformer.make(sourcePath, outputPath, args.includes("--with-reason"), args.includes("--remove-fill"));
