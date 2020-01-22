@@ -1,5 +1,12 @@
 # Changelog of `react-from-svg`
 
+## 2.0.0 - 2020-01-22
+
+- Try to load compiled transformer differently (not in-source as it's the recommended place - to avoid issue with existing bs compilation, which can override & break nodejs script due to not using commonjs).
+- Use bs-platform@^7.0.0
+
+We might in the future rebuild script before running it.
+
 ## 1.2.3 - 2020-01-03
 
 - Fix unwanted whitespace that create text nodes
