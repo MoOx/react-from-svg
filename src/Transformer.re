@@ -235,7 +235,7 @@ let writeRe = (outputPath, absolutePath, files) => {
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
-  ~fill: ReactFromSvg.Size.t=?
+  ~fill: string=?
 ) => React.element  = "default";
 |j};
     Fs.writeFileAsUtf8Sync(pathname, reWrapper);
