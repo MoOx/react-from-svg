@@ -6,7 +6,9 @@
 
 ## 2.0.0 - 2020-01-22
 
-- Try to load compiled transformer differently (not in-source as it's the recommended place - to avoid issue with existing bs compilation, which can override & break nodejs script due to not using commonjs).
+- Try to load compiled transformer differently (not in-source as it's the
+  recommended place - to avoid issue with existing bs compilation, which can
+  override & break nodejs script due to not using commonjs).
 - Use bs-platform@^7.0.0
 
 We might in the future rebuild script before running it.
@@ -29,9 +31,7 @@ Add `--remove-fill` option
 
 ## 1.1.0 - 2019-12-21
 
-Ooopsy :)
-Tons of fixes so it's usable.
-And `dp` unit
+Ooopsy :) Tons of fixes so it's usable. And `dp` unit
 
 ## 1.0.0 - 2019-12-21
 
@@ -64,7 +64,8 @@ bs-platform 5.0.1 & reason-react 0.7.0
 
 ## 0.1.2 - 2019-04-09
 
-Add dep (unused in production) to fit development bsconfig that is the same for production
+Add dep (unused in production) to fit development bsconfig that is the same for
+production
 
 ## 0.1.1 - 2019-04-09
 
