@@ -11,7 +11,7 @@
 ## Usage
 
 ```console
-react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--reason-absolute-path]
+react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--reason-module-path]
 ```
 
 ### Examples
@@ -34,5 +34,5 @@ you defined a webpack alias and you don't generate your bucklescript output
 "in-source"
 
 ```console
-react-from-svg assets/svgs src/Svgs --with-reason --reason-absolute-path=src/components
+react-from-svg assets/svgs src/Svgs --with-reason --reason-module-path=./src/components
 ```

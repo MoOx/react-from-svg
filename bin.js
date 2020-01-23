@@ -18,7 +18,7 @@ const outputPath = args.shift();
 const acceptedOptions = [
   "--with-reason",
   "--remove-fill",
-  "--reason-absolute-path",
+  "--reason-module-path",
 ];
 
 const splitArgs = args.map(arg => arg.split("="));
@@ -72,6 +72,6 @@ setTimeout(function() {
     outputPath,
     hasArg(splitArgs, "--with-reason"),
     hasArg(splitArgs, "--remove-fill"),
-    getArg(splitArgs, "--reason-absolute-path"),
+    getArg(splitArgs, "--reason-module-path"),
   );
 }, 0);

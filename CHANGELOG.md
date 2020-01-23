@@ -1,5 +1,11 @@
 # Changelog of `react-from-svg`
 
+## 3.0.0 - 2020-01-23
+
+- fixed reason generated module name to the js
+- `--reason-absolute-path` is now `--reason-module-path` & can support absolute
+  and local path
+
 ## 2.1.1 - 2020-01-23
 
 - oopsy path
