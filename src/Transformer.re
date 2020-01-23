@@ -228,7 +228,7 @@ let writeRe = (outputPath, absolutePath, files) => {
     mkdirpSync(Path.dirname(pathname));
     let bsModulePath = absolutePath->Option.getWithDefault(".")->Path.join2("SVG"++filename"++".js");
     let reWrapper = {j|
-[@react.component] [@bs.module "$(bsModulePath)SVG$filename.js"]
+[@react.component] [@bs.module "$(bsModulePath)"]
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
