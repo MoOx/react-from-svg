@@ -11,12 +11,13 @@
 ## Usage
 
 ```console
-react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--absolute-path]
+react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--reason-absolute-path]
 ```
 
 ### Examples
 
-Just React Native / React Native Web SVGs, with fill svg props removed, nice for icons
+Just React Native / React Native Web SVGs, with fill svg props removed, nice for
+icons
 
 ```console
 react-from-svg assets/svgs src/Svgs --remove-fill
@@ -28,9 +29,10 @@ React Native (Web) + ReasonML bindings SVGs
 react-from-svg assets/svgs src/Svgs --with-reason
 ```
 
-React Native (Web) + ReasonML bindings SVGs and absolute path : it's usefull if you defined a webpack alias and you don't generate your bucklescript output "in-source"
+React Native (Web) + ReasonML bindings SVGs and absolute path : it's usefull if
+you defined a webpack alias and you don't generate your bucklescript output
+"in-source"
 
 ```console
-react-from-svg assets/svgs src/Svgs --with-reason --absolute-path=src/components
+react-from-svg assets/svgs src/Svgs --with-reason --reason-absolute-path=src/components
 ```
-

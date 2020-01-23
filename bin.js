@@ -15,7 +15,11 @@ args.shift(); // bin name
 const sourcePath = args.shift();
 const outputPath = args.shift();
 
-const acceptedOptions = ["--with-reason", "--remove-fill", "--absolute-path"];
+const acceptedOptions = [
+  "--with-reason",
+  "--remove-fill",
+  "--reason-absolute-path",
+];
 
 const splitArgs = args.map(arg => arg.split("="));
 
@@ -68,6 +72,6 @@ setTimeout(function() {
     outputPath,
     hasArg(splitArgs, "--with-reason"),
     hasArg(splitArgs, "--remove-fill"),
-    getArg(splitArgs, "--absolute-path"),
+    getArg(splitArgs, "--reason-absolute-path"),
   );
 }, 0);
