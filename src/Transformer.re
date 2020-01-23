@@ -4,6 +4,7 @@ open Belt;
 [@bs.module "mkdirp"] external mkdirpSync: string => unit = "sync";
 
 let root = Process.cwd();
+let sep = Path.sep;
 
 type file = {
   name: string,
@@ -224,14 +225,13 @@ let write = (outputPath, files) => {
 let writeRe = (outputPath, absolutePath, files) => {
   files->Array.forEach(file => {
     let filename = file.name;
-    let pathname = Path.join([|outputPath, {j|SVG$filename.re|j}|]);
+    let svgname = {j|SVG$filename.re|j};
+    let pathname = Path.join([|outputPath, svgname|]);
     mkdirpSync(Path.dirname(pathname));
     let bsModulePath =
-      absolutePath
-      ->Option.getWithDefault(".")
-      ->Path.join2("SVG" ++ "filename" ++ ".js");
+      absolutePath->Option.getWithDefault(".")->Path.join2(svgname);
     let reWrapper = {j|
-[@react.component] [@bs.module "$(bsModulePath)"]
+[@react.component] [@bs.module ".$(sep)$bsModulePath"]
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
