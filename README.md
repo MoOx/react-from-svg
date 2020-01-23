@@ -11,7 +11,7 @@
 ## Usage
 
 ```console
-react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill]
+react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--absolute-path]
 ```
 
 ### Examples
@@ -26,5 +26,11 @@ React Native (Web) + ReasonML bindings SVGs
 
 ```console
 react-from-svg assets/svgs src/Svgs --with-reason
+```
+
+React Native (Web) + ReasonML bindings SVGs and absolute path : it's usefull if you defined a webpack alias and you don't generate your bucklescript output "in-source"
+
+```console
+react-from-svg assets/svgs src/Svgs --with-reason --absolute-path=src/components
 ```
 
