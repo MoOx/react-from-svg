@@ -1,5 +1,11 @@
 # Changelog of `react-from-svg`
 
+## 2.1.0 - 2020-01-23
+
+- Add `--reason-absolute-path` option for reason files
+  ([#4](https://github.com/MoOx/react-from-svg/pull/4)) by @Freddy03h
+- Fix fill reason type by @MoOx
+
 ## 2.0.1 - 2020-01-22
 
 - Try to autorebuild if compiled artifacts are missing
