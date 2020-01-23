@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+function hasArg(args, option) {
+  return Boolean(args.find(arg => arg[0] === option));
+}
+
+function getArg(args, option) {
+  const argWithValue = args.find(arg => arg[0] === option);
+  return argWithValue && argWithValue.length == 2 ? argWithValue[1] : undefined;
+}
 
 const args = process.argv.slice(0);
 args.shift(); // node
@@ -7,7 +15,9 @@ args.shift(); // bin name
 const sourcePath = args.shift();
 const outputPath = args.shift();
 
-const acceptedOptions = ["--with-reason", "--remove-fill"];
+const acceptedOptions = ["--with-reason", "--remove-fill", "--absolute-path"];
+
+const splitArgs = args.map(arg => arg.split("="));
 
 if (!sourcePath) {
   throw new Error("source path is required");
@@ -15,7 +25,7 @@ if (!sourcePath) {
 if (!outputPath) {
   throw new Error("output path is required");
 }
-if (args.filter(arg => !acceptedOptions.includes(arg)).length > 0) {
+if (splitArgs.filter(arg => !acceptedOptions.includes(arg[0])).length > 0) {
   throw new Error("only accepted options are: "+acceptedOptions);
 }
 
@@ -54,5 +64,5 @@ setTimeout(function () {
     )
   };
 
-  transformer.make(sourcePath, outputPath, args.includes("--with-reason"), args.includes("--remove-fill"));
+  transformer.make(sourcePath, outputPath, hasArg(splitArgs, "--with-reason"), hasArg(splitArgs, "--remove-fill"), getArg(splitArgs, "--absolute-path"));
 }, 0);

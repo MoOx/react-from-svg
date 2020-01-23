@@ -221,13 +221,17 @@ let write = (outputPath, files) => {
   files;
 };
 
-let writeRe = (outputPath, files) => {
+let writeRe = (outputPath, absolutePath, files) => {
   files->Array.forEach(file => {
     let filename = file.name;
     let pathname = Path.join([|outputPath, {j|SVG$filename.re|j}|]);
     mkdirpSync(Path.dirname(pathname));
+    let bsModulePath =
+      absolutePath
+      ->Option.getWithDefault(".")
+      ->Path.join2("SVG" ++ "filename" ++ ".js");
     let reWrapper = {j|
-[@react.component] [@bs.module "./SVG$filename.js"]
+[@react.component] [@bs.module "$(bsModulePath)"]
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
@@ -239,7 +243,7 @@ external make: (
   files;
 };
 
-let make = (sourcePath, outputPath, reason, removeFill) => {
+let make = (sourcePath, outputPath, reason, removeFill, absolutePath) => {
   let futureFiles =
     Path.join([|sourcePath, "*.svg"|])
     ->get
@@ -253,7 +257,7 @@ let make = (sourcePath, outputPath, reason, removeFill) => {
 
   if (reason) {
     futureFiles
-    ->Future.map(writeRe(outputPath))
+    ->Future.map(writeRe(outputPath, Js.Nullable.toOption(absolutePath)))
     ->Future.tap(files =>
         Js.log2("Files written (reason wrappers)", files->Array.length)
       )

@@ -33,9 +33,10 @@
     "svg:--nothing": "trash test/components && ./bin.js test test/components",
     "svg:--remove-fill": "trash test/components && ./bin.js test test/components --remove-fill",
     "svg:--with-reason": "trash test/components && ./bin.js test test/components --with-reason && yarn svg:format",
+    "svg:--with-reason--absolute-path": "trash test/components && ./bin.js test test/components --with-reason --absolute-path=test/components && yarn svg:format",
     "svg:--all": "trash test/components && ./bin.js test test/components --with-reason --remove-fill && yarn svg:format",
     "svg:--all2": "trash test/components && ./bin.js test test/components --remove-fill --with-reason  && yarn svg:format",
-    "test": "yarn re:clean && yarn re:build && yarn svg:--nothing && yarn svg:--remove-fill && yarn svg:--with-reason && yarn svg:--all && yarn svg:--all2",
+    "test": "yarn re:clean && yarn re:build && yarn svg:--nothing && yarn svg:--remove-fill && yarn svg:--with-reason && yarn svg:--with-reason--absolute-path && yarn svg:--all && yarn svg:--all2",
     "release": "npmpub"
   },
   "dependencies": {
