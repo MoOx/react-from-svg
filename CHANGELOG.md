@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 2.1.1 - 2020-01-23
+
+- oopsy path
+
 ## 2.1.0 - 2020-01-23
 
 - Add `--reason-absolute-path` option for reason files
