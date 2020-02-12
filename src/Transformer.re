@@ -173,7 +173,7 @@ import Svg, {
   Ellipse,
   G,
   Text,
-  TSpan,
+  TSpan as Tspan,
   TextPath,
   Path,
   Polygon,
