@@ -1,5 +1,12 @@
 # Changelog of `react-from-svg`
 
+## 3.1.0 - 2020-02-18
+
+- Fix TSpan import error  
+  ([#6](https://github.com/MoOx/react-from-svg/pull/6)) by @broerjuang
+- bump bs-platform to 7.1.0
+  ([#6](https://github.com/MoOx/react-from-svg/pull/6)) by @broerjuang
+
 ## 3.0.0 - 2020-01-23
 
 - fixed reason generated module name to the js
