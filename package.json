@@ -40,7 +40,7 @@
     "release": "npmpub"
   },
   "dependencies": {
-    "bs-platform": "^7.0.0",
+    "bs-platform": "^7.1.0",
     "glob": "^7.1.3",
     "mkdirp": "^0.5.1",
     "reason-future": "^2.4.0",
