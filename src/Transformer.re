@@ -70,7 +70,10 @@ let transformSvg = (svg, removeFill) => {
          {j|<svg \$1|j},
        )
     // inject props
-    |> Js.String.replace(">", " width={width} height={height} fill={fill}>")
+    |> Js.String.replace(
+         ">",
+         " width={width} height={height} fill={fill} stroke={stroke}>",
+       )
     // case for react-native-svg
     |> Js.String.replaceByRe(
          [%re "/\\s([a-z]+)-a([a-z]+)/g"],
@@ -192,7 +195,7 @@ import Svg, {
   Mask,
 } from 'react-native-svg';
 
-export default ({width, height, fill}) => {
+export default ({width, height, fill, stroke}) => {
   return (
 $transformedSvgCleaned
   );
@@ -240,7 +243,8 @@ let writeRe = (outputPath, modulePath, files) => {
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
-  ~fill: string=?
+  ~fill: string=?,
+  ~stroke: string=?
 ) => React.element  = "default";
 |j};
     Fs.writeFileAsUtf8Sync(pathname, reWrapper);
