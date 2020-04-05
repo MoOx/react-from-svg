@@ -18,6 +18,7 @@ const outputPath = args.shift();
 const acceptedOptions = [
   "--with-reason",
   "--remove-fill",
+  "--remove-stroke",
   "--reason-module-path",
 ];
 
@@ -72,6 +73,7 @@ setTimeout(function() {
     outputPath,
     hasArg(splitArgs, "--with-reason"),
     hasArg(splitArgs, "--remove-fill"),
+    hasArg(splitArgs, "--remove-stroke"),
     getArg(splitArgs, "--reason-module-path"),
   );
 }, 0);

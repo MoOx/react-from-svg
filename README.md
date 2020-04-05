@@ -11,7 +11,7 @@
 ## Usage
 
 ```console
-react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--reason-module-path]
+react-from-svg [sourcePath] [outputPath] [--with-reason] [--remove-fill] [--remove-stroke] [--reason-module-path]
 ```
 
 ### Examples
