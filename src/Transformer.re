@@ -38,6 +38,7 @@ let shortenFilenames = (sourcePath, files) => {
 let transformSvg = (svg, removeFill, removeStroke) => {
   let transformedSvg =
     svg
+    |> Js.String.replaceByRe([%re "/'/g"], "\"")
     |> Js.String.replaceByRe([%re "/\\sversion=\"1.1\"/g"], "")
     |> Js.String.replaceByRe([%re "/<\\?xml(.*)\\?>/g"], "")
     |> Js.String.replaceByRe(
