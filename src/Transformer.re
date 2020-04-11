@@ -113,6 +113,10 @@ let transformSvg = (svg, removeFill, removeStroke) => {
          {j| \$1L\$2|j},
        )
     |> Js.String.replaceByRe(
+         [%re "/\\s([a-z]+)-m([a-z]+)/g"],
+         {j| \$1M\$2|j},
+       )
+    |> Js.String.replaceByRe(
          [%re "/\\s([a-z]+)-o([a-z]+)/g"],
          {j| \$1O\$2|j},
        )
