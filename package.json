@@ -32,6 +32,7 @@
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "svg:--nothing": "trash test/components && ./bin.js test test/components",
     "svg:--remove-fill": "trash test/components && ./bin.js test test/components --remove-fill",
+    "svg:--remove-stroke": "trash test/components && ./bin.js test test/components --remove-stroke",
     "svg:--with-reason": "trash test/components && ./bin.js test test/components --with-reason && yarn svg:format",
     "svg:--with-reason--reason-module-path": "trash test/components && ./bin.js test test/components --with-reason --reason-module-path=test/components && yarn svg:format",
     "svg:--all": "trash test/components && ./bin.js test test/components --with-reason --remove-fill && yarn svg:format",

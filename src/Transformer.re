@@ -35,9 +35,10 @@ let shortenFilenames = (sourcePath, files) => {
   );
 };
 
-let transformSvg = (svg, removeFill) => {
+let transformSvg = (svg, removeFill, removeStroke) => {
   let transformedSvg =
     svg
+    |> Js.String.replaceByRe([%re "/'/g"], "\"")
     |> Js.String.replaceByRe([%re "/\\sversion=\"1.1\"/g"], "")
     |> Js.String.replaceByRe([%re "/<\\?xml(.*)\\?>/g"], "")
     |> Js.String.replaceByRe(
@@ -70,7 +71,10 @@ let transformSvg = (svg, removeFill) => {
          {j|<svg \$1|j},
        )
     // inject props
-    |> Js.String.replace(">", " width={width} height={height} fill={fill}>")
+    |> Js.String.replace(
+         ">",
+         " width={width} height={height} fill={fill} stroke={stroke}>",
+       )
     // case for react-native-svg
     |> Js.String.replaceByRe(
          [%re "/\\s([a-z]+)-a([a-z]+)/g"],
@@ -106,6 +110,10 @@ let transformSvg = (svg, removeFill) => {
        )
     |> Js.String.replaceByRe(
          [%re "/\\s([a-z]+)-l([a-z]+)/g"],
+         {j| \$1L\$2|j},
+       )
+    |> Js.String.replaceByRe(
+         [%re "/\\s([a-z]+)-m([a-z]+)/g"],
          {j| \$1M\$2|j},
        )
     |> Js.String.replaceByRe(
@@ -159,13 +167,22 @@ let transformSvg = (svg, removeFill) => {
     |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z")
     |> Js.String.replaceByRe([%re "/>\\s+</g"], "><");
 
-  let transformedSvgCleaned =
+  let transformedSvgFillCleaned =
     if (!removeFill) {
       transformedSvg;
     } else {
       transformedSvg
       |> Js.String.replaceByRe([%re "/ fill=\"[^\\\"]*\"/g"], "");
     };
+
+  let transformedSvgCleaned =
+    if (!removeStroke) {
+      transformedSvgFillCleaned;
+    } else {
+      transformedSvgFillCleaned
+      |> Js.String.replaceByRe([%re "/ stroke=\"[^\\\"]*\"/g"], "");
+    };
+
   Some(
     {j|import React from 'react';
 import Svg, {
@@ -192,7 +209,7 @@ import Svg, {
   Mask,
 } from 'react-native-svg';
 
-export default ({width, height, fill}) => {
+export default ({width, height, fill, stroke}) => {
   return (
 $transformedSvgCleaned
   );
@@ -201,11 +218,11 @@ $transformedSvgCleaned
   );
 };
 
-let transform = (files, removeFill) => {
+let transform = (files, removeFill, removeStroke) => {
   let f =
     files->Array.reduce([||], (files, file) =>
       file.content
-      ->transformSvg(removeFill)
+      ->transformSvg(removeFill, removeStroke)
       ->Option.map(content => files->Array.concat([|{...file, content}|]))
       ->Option.getWithDefault(files)
     );
@@ -240,7 +257,8 @@ let writeRe = (outputPath, modulePath, files) => {
 external make: (
   ~width: ReactFromSvg.Size.t=?,
   ~height: ReactFromSvg.Size.t=?,
-  ~fill: string=?
+  ~fill: string=?,
+  ~stroke: string=?
 ) => React.element  = "default";
 |j};
     Fs.writeFileAsUtf8Sync(pathname, reWrapper);
@@ -248,14 +266,15 @@ external make: (
   files;
 };
 
-let make = (sourcePath, outputPath, reason, removeFill, modulePath) => {
+let make =
+    (sourcePath, outputPath, reason, removeFill, removeStroke, modulePath) => {
   let futureFiles =
     Path.join([|sourcePath, "*.svg"|])
     ->get
     ->Future.map(files => files->Result.getExn)
     ->Future.tap(files => Js.log2("Files found", files->Array.length))
     ->Future.map(shortenFilenames(sourcePath))
-    ->Future.map(files => transform(files, removeFill))
+    ->Future.map(files => transform(files, removeFill, removeStroke))
     ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
     ->Future.map(write(outputPath))
     ->Future.tap(files => Js.log2("Files written", files->Array.length));
