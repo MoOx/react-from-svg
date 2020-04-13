@@ -30,7 +30,8 @@
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "test": "yarn re:clean && yarn re:build && jest \"__tests__/(.*).proxy.js\"",
+    "tests": "jest \"__tests__/(.*).proxy.js\"",
+    "test": "yarn re:clean && yarn re:build && yarn tests",
     "release": "npmpub"
   },
   "dependencies": {

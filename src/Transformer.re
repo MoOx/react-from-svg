@@ -59,15 +59,15 @@ let transformSvg = (svg, removeFill, removeStroke) => {
     // |> Js.String.replaceByRe([%re "/></g"], {j|> <|j})
     // remove future props
     |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?width=\"[^\\\"]*\"/g"],
+         [%re "/<svg\\s?([^>]*)?\\swidth=\"[^\\\"]*\"/g"],
          {j|<svg \$1|j},
        )
     |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?height=\"[^\\\"]*\"/g"],
+         [%re "/<svg\\s?([^>]*)?\\sheight=\"[^\\\"]*\"/g"],
          {j|<svg \$1|j},
        )
     |> Js.String.replaceByRe(
-         [%re "/<svg\\s?(.*)?\\s?fill=\"[^\\\"]*\"/g"],
+         [%re "/<svg\\s?([^>]*)?\\sfill=\"[^\\\"]*\"/g"],
          {j|<svg \$1|j},
        )
     // inject props

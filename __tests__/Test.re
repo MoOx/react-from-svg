@@ -26,6 +26,10 @@ describe("simple svg", () =>
   readFileSync("./test/simple.svg", `utf8)->testAll
 );
 
+describe("edge case width svg", () =>
+  readFileSync("./test/edge-case-width.svg", `utf8)->testAll
+);
+
 describe("clean & minimal svg", () =>
   readFileSync("./test/clean.svg", `utf8)->testAll
 );
