@@ -30,14 +30,7 @@
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "svg:--nothing": "trash test/components && ./bin.js test test/components",
-    "svg:--remove-fill": "trash test/components && ./bin.js test test/components --remove-fill",
-    "svg:--remove-stroke": "trash test/components && ./bin.js test test/components --remove-stroke",
-    "svg:--with-reason": "trash test/components && ./bin.js test test/components --with-reason && yarn svg:format",
-    "svg:--with-reason--reason-module-path": "trash test/components && ./bin.js test test/components --with-reason --reason-module-path=test/components && yarn svg:format",
-    "svg:--all": "trash test/components && ./bin.js test test/components --with-reason --remove-fill && yarn svg:format",
-    "svg:--all2": "trash test/components && ./bin.js test test/components --remove-fill --with-reason  && yarn svg:format",
-    "test": "yarn re:clean && yarn re:build && yarn svg:--nothing && yarn svg:--remove-fill && yarn svg:--with-reason && yarn svg:--with-reason--reason-module-path && yarn svg:--all && yarn svg:--all2",
+    "test": "yarn re:clean && yarn re:build && jest lib/js/__tests__",
     "release": "npmpub"
   },
   "dependencies": {
@@ -48,7 +41,9 @@
     "reason-react": "^0.7.0"
   },
   "devDependencies": {
+    "@glennsl/bs-jest": "^0.5.1",
     "husky": "^4.2.0",
+    "jest": "^25.3.0",
     "lint-staged": "^10.0.2",
     "npmpub": "^5.0.0",
     "prettier": "^1.19.1",

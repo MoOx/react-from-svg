@@ -6,7 +6,7 @@
     "react-jsx": 3
   },
   "package-specs": {
-    "module": "commonjs",
+    "module": "commonjs"
     // "in-source": true
   },
   "suffix": ".bs.js",
@@ -14,7 +14,12 @@
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "__tests__",
+      "type": "dev"
     }
   ],
-  "bs-dependencies": ["reason-future", "reason-react"]
+  "bs-dependencies": ["reason-future", "reason-react"],
+  "bs-dev-dependencies": ["@glennsl/bs-jest"]
 }
