@@ -26,11 +26,11 @@
     "bsconfig.json"
   ],
   "scripts": {
-    "postinstall": "bsb -make-world",
+    "postinstall": "bsb -clean-world -make-world",
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "test": "yarn re:build && jest lib/js/__tests__",
+    "test": "yarn re:clean && yarn re:build && jest __tests__",
     "release": "npmpub"
   },
   "dependencies": {
