@@ -1,37 +1,44 @@
 #!/usr/bin/env node
+"use strict";
+const meow = require("meow");
 
-function hasArg(args, option) {
-  return Boolean(args.find(arg => arg[0] === option));
-}
+// UPDATE README IF YOU UPDATE THIS PLEASE
+const cli = meow(
+  `
+  Usage
+    $ react-from-svg <sourcePath> <outputPath> [--with-native|--with-web]
 
-function getArg(args, option) {
-  const argWithValue = args.find(arg => arg[0] === option);
-  return argWithValue && argWithValue.length == 2 ? argWithValue[1] : undefined;
-}
+  Options
+    --with-native, -native  Output code for react-native-svg
+    --with-web, -web        Output code for DOM. If --with-native is also used, will be output as .web.js files
+    --with-reason, -bs      Output ReasonML bindings code
+    --remove-fill, -rf      Remove all 'fill' properties from SVGs, convenient for icons
+    --remove-stroke, -rs    Remove all 'stroke' properties from SVGs, convenient for icons
+    --commonjs, -cjs        Export as commonjs instead of es6 import/export
+    --bs-module-path, -bsp  Allow to customise ReasonML output path
 
-const args = process.argv.slice(0);
-args.shift(); // node
-args.shift(); // bin name
-const sourcePath = args.shift();
-const outputPath = args.shift();
+  Example
+    $ react-from-svg assets/svgs src/Svgs --remove-fill
+`,
+  {
+    flags: {
+      "with-native": { type: "boolean", alias: "native" },
+      "with-web": { type: "boolean", alias: "web" },
+      "with-reason": { type: "boolean", alias: "bs" },
+      "remove-fill": { type: "boolean", alias: "rf" },
+      "remove-stroke": { type: "boolean", alias: "rs" },
+      commonjs: { type: "boolean", alias: "cjs" },
+      "bs-module-path": { type: "string", alias: "bsp" },
+    },
+  },
+);
 
-const acceptedOptions = [
-  "--with-reason",
-  "--remove-fill",
-  "--remove-stroke",
-  "--reason-module-path",
-];
-
-const splitArgs = args.map(arg => arg.split("="));
-
-if (!sourcePath) {
-  throw new Error("source path is required");
-}
-if (!outputPath) {
-  throw new Error("output path is required");
-}
-if (splitArgs.filter(arg => !acceptedOptions.includes(arg[0])).length > 0) {
-  throw new Error("only accepted options are: " + acceptedOptions);
+if (cli.flags.withNative === undefined && cli.flags.withWeb === undefined) {
+  console.error(
+    "You should at least choose an option between --with-native or --with web!",
+  );
+  cli.showHelp();
+  process.exit(1);
 }
 
 ///
@@ -68,12 +75,5 @@ setTimeout(function() {
     );
   }
 
-  transformer.make(
-    sourcePath,
-    outputPath,
-    hasArg(splitArgs, "--with-reason"),
-    hasArg(splitArgs, "--remove-fill"),
-    hasArg(splitArgs, "--remove-stroke"),
-    getArg(splitArgs, "--reason-module-path"),
-  );
+  transformer.make(cli.input, cli.flags);
 }, 0);

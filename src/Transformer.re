@@ -35,199 +35,60 @@ let shortenFilenames = (sourcePath, files) => {
   );
 };
 
-let transformSvg = (svg, removeFill, removeStroke) => {
-  let transformedSvg =
+let noop = s => s;
+
+let transformSvg =
+    (svg, ~removeFill, ~removeStroke, ~commonjs, ~template, ~pascalCaseTag) =>
+  AdjustSvg.(
     svg
-    |> Js.String.replaceByRe([%re "/'/g"], "\"")
-    |> Js.String.replaceByRe([%re "/\\sversion=\"1.1\"/g"], "")
-    |> Js.String.replaceByRe([%re "/<\\?xml(.*)\\?>/g"], "")
-    |> Js.String.replaceByRe(
-         [%re "/\\sxmlns=\"http:\\/\\/www\\.w3\\.org\\/2000\\/svg\"/g"],
-         "",
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\sxmlns:xlink=\"http:\\/\\/www.w3.org\\/1999\\/xlink\"/g"],
-         "",
-       )
-    // remove useless data
-    |> Js.String.replaceByRe([%re "/<title>(.*)<\\/title>/g"], "")
-    |> Js.String.replaceByRe([%re "/<desc>(.*)<\\/desc>/g"], "")
-    |> Js.String.replaceByRe([%re "/<!--(.*)-->/g"], "")
-    //
-    // |> Js.String.replaceByRe([%re "/\"\\//g"], {j|" /|j})
-    // add space between jsx element?
-    // |> Js.String.replaceByRe([%re "/></g"], {j|> <|j})
-    // remove future props
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?([^>]*)?\\swidth=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?([^>]*)?\\sheight=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/<svg\\s?([^>]*)?\\sfill=\"[^\\\"]*\"/g"],
-         {j|<svg \$1|j},
-       )
-    // inject props
-    |> Js.String.replace(
-         ">",
-         " width={width} height={height} fill={fill} stroke={stroke}>",
-       )
-    // case for react-native-svg
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-a([a-z]+)/g"],
-         {j| \$1A\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-b([a-z]+)/g"],
-         {j| \$1B\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-c([a-z]+)/g"],
-         {j| \$1C\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-d([a-z]+)/g"],
-         {j| \$1D\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-e([a-z]+)/g"],
-         {j| \$1E\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-f([a-z]+)/g"],
-         {j| \$1F\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-g([a-z]+)/g"],
-         {j| \$1G\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-h([a-z]+)/g"],
-         {j| \$1H\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-l([a-z]+)/g"],
-         {j| \$1L\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-m([a-z]+)/g"],
-         {j| \$1M\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-o([a-z]+)/g"],
-         {j| \$1O\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-p([a-z]+)/g"],
-         {j| \$1P\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-s([a-z]+)/g"],
-         {j| \$1S\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-t([a-z]+)/g"],
-         {j| \$1T\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-r([a-z]+)/g"],
-         {j| \$1R\$2|j},
-       )
-    |> Js.String.replaceByRe(
-         [%re "/\\s([a-z]+)-w([a-z]+)/g"],
-         {j| \$1W\$2|j},
-       )
-    |> Js.String.replaceByRe([%re "/<(\\/?)a/g"], "<$1A")
-    |> Js.String.replaceByRe([%re "/<(\\/?)b/g"], "<$1B")
-    |> Js.String.replaceByRe([%re "/<(\\/?)c/g"], "<$1C")
-    |> Js.String.replaceByRe([%re "/<(\\/?)d/g"], "<$1D")
-    |> Js.String.replaceByRe([%re "/<(\\/?)e/g"], "<$1E")
-    |> Js.String.replaceByRe([%re "/<(\\/?)f/g"], "<$1F")
-    |> Js.String.replaceByRe([%re "/<(\\/?)g/g"], "<$1G")
-    |> Js.String.replaceByRe([%re "/<(\\/?)h/g"], "<$1H")
-    |> Js.String.replaceByRe([%re "/<(\\/?)i/g"], "<$1I")
-    |> Js.String.replaceByRe([%re "/<(\\/?)j/g"], "<$1J")
-    |> Js.String.replaceByRe([%re "/<(\\/?)k/g"], "<$1K")
-    |> Js.String.replaceByRe([%re "/<(\\/?)l/g"], "<$1L")
-    |> Js.String.replaceByRe([%re "/<(\\/?)m/g"], "<$1M")
-    |> Js.String.replaceByRe([%re "/<(\\/?)o/g"], "<$1O")
-    |> Js.String.replaceByRe([%re "/<(\\/?)p/g"], "<$1P")
-    |> Js.String.replaceByRe([%re "/<(\\/?)q/g"], "<$1Q")
-    |> Js.String.replaceByRe([%re "/<(\\/?)r/g"], "<$1R")
-    |> Js.String.replaceByRe([%re "/<(\\/?)s/g"], "<$1S")
-    |> Js.String.replaceByRe([%re "/<(\\/?)t/g"], "<$1T")
-    |> Js.String.replaceByRe([%re "/<(\\/?)u/g"], "<$1U")
-    |> Js.String.replaceByRe([%re "/<(\\/?)v/g"], "<$1V")
-    |> Js.String.replaceByRe([%re "/<(\\/?)w/g"], "<$1W")
-    |> Js.String.replaceByRe([%re "/<(\\/?)x/g"], "<$1X")
-    |> Js.String.replaceByRe([%re "/<(\\/?)y/g"], "<$1Y")
-    |> Js.String.replaceByRe([%re "/<(\\/?)z/g"], "<$1Z")
-    |> Js.String.replaceByRe([%re "/>\\s+</g"], "><");
-
-  let transformedSvgFillCleaned =
-    if (!removeFill) {
-      transformedSvg;
-    } else {
-      transformedSvg
-      |> Js.String.replaceByRe([%re "/ fill=\"[^\\\"]*\"/g"], "");
-    };
-
-  let transformedSvgCleaned =
-    if (!removeStroke) {
-      transformedSvgFillCleaned;
-    } else {
-      transformedSvgFillCleaned
-      |> Js.String.replaceByRe([%re "/ stroke=\"[^\\\"]*\"/g"], "");
-    };
-
-  Some(
-    {j|import React from 'react';
-import Svg, {
-  Circle,
-  Ellipse,
-  G,
-  Text,
-  TSpan as Tspan,
-  TextPath,
-  Path,
-  Polygon,
-  Polyline,
-  Line,
-  Rect,
-  Use,
-  Image,
-  Symbol,
-  Defs,
-  LinearGradient,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
-} from 'react-native-svg';
-
-export default ({width, height, fill, stroke}) => {
-  return (
-$transformedSvgCleaned
+    ->cleanupStart
+    ->prepareProps
+    ->dashToCamelCaseProps
+    ->(pascalCaseTag ? tagToPascalCase : noop)
+    ->cleanupEnd
+    ->(removeFill ? deleteFill : noop)
+    ->(removeStroke ? deleteStroke : noop)
+    ->template(commonjs)
   );
-};
-|j},
+
+let transformFiles =
+    (files, ~withNative, ~withWeb, ~removeFill, ~removeStroke, ~commonjs) => {
+  files->Array.reduce(
+    [||],
+    (files, file) => {
+      let trsf =
+        file.content->transformSvg(~removeFill, ~removeStroke, ~commonjs);
+      Js.log2(withNative, withWeb);
+      switch (withNative, withWeb) {
+      | (false, false) => files
+      | (true, false) =>
+        files->Array.concat([|
+          {
+            name: file.name,
+            content: trsf(~template=Templates.native, ~pascalCaseTag=true),
+          },
+        |])
+      | (false, true) =>
+        files->Array.concat([|
+          {
+            name: file.name,
+            content: trsf(~template=Templates.web, ~pascalCaseTag=false),
+          },
+        |])
+      | (true, true) =>
+        files->Array.concat([|
+          {
+            name: file.name,
+            content: trsf(~template=Templates.native, ~pascalCaseTag=true),
+          },
+          {
+            name: file.name ++ ".web",
+            content: trsf(~template=Templates.web, ~pascalCaseTag=false),
+          },
+        |])
+      };
+    },
   );
-};
-
-let transform = (files, removeFill, removeStroke) => {
-  let f =
-    files->Array.reduce([||], (files, file) =>
-      file.content
-      ->transformSvg(removeFill, removeStroke)
-      ->Option.map(content => files->Array.concat([|{...file, content}|]))
-      ->Option.getWithDefault(files)
-    );
-
-  f;
 };
 
 let write = (outputPath, files) => {
@@ -266,22 +127,57 @@ external make: (
   files;
 };
 
-let make =
-    (sourcePath, outputPath, reason, removeFill, removeStroke, modulePath) => {
+type flags = {
+  withNative: Js.Undefined.t(bool),
+  withWeb: Js.Undefined.t(bool),
+  withReason: Js.Undefined.t(bool),
+  removeFill: Js.Undefined.t(bool),
+  removeStroke: Js.Undefined.t(bool),
+  commonjs: Js.Undefined.t(bool),
+  bsModulePath: Js.Undefined.t(string),
+};
+
+let make = ((sourcePath, outputPath), flags) => {
+  Js.log2("flags", flags);
   let futureFiles =
     Path.join([|sourcePath, "*.svg"|])
     ->get
     ->Future.map(files => files->Result.getExn)
     ->Future.tap(files => Js.log2("Files found", files->Array.length))
     ->Future.map(shortenFilenames(sourcePath))
-    ->Future.map(files => transform(files, removeFill, removeStroke))
+    ->Future.map(files =>
+        files->transformFiles(
+          ~withNative=
+            flags.withNative
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+          ~withWeb=
+            flags.withWeb
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+          ~removeFill=
+            flags.removeFill
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+          ~removeStroke=
+            flags.removeStroke
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+          ~commonjs=
+            flags.commonjs
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+        )
+      )
     ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
     ->Future.map(write(outputPath))
     ->Future.tap(files => Js.log2("Files written", files->Array.length));
 
-  if (reason) {
+  if (flags.withReason->Js.Undefined.toOption->Option.getWithDefault(false)) {
     futureFiles
-    ->Future.map(writeRe(outputPath, Js.Nullable.toOption(modulePath)))
+    ->Future.map(
+        writeRe(outputPath, flags.bsModulePath->Js.Undefined.toOption),
+      )
     ->Future.tap(files =>
         Js.log2("Files written (reason wrappers)", files->Array.length)
       )

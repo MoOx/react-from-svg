@@ -5,7 +5,13 @@ open Expect;
 
 let snap = (svg, ~removeFill, ~removeStroke) => {
   svg
-  ->Transformer.transformSvg(removeFill, removeStroke)
+  ->Transformer.transformSvg(
+      ~removeFill,
+      ~removeStroke,
+      ~commonjs=false,
+      ~pascalCaseTag=true,
+      ~template=Templates.native,
+    )
   ->expect
   ->toMatchSnapshot;
 };
