@@ -26,7 +26,7 @@
     "bsconfig.json"
   ],
   "scripts": {
-    "postinstall": "bsb -clean-world -make-world",
+    "postinstall": "bsb -make-world",
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
