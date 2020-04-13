@@ -25,5 +25,5 @@ jobs:
             --frozen-lockfile
       - name: Test
         run: yarn test
-        # env:
-        #   CI: true
+        env:
+          CI: true
