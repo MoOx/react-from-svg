@@ -30,12 +30,12 @@
     "!lib/ocaml"
   ],
   "scripts": {
-    "prepare": "bsb -clean-world -make-world && webpack",
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "tests": "jest",
-    "test": "yarn re:clean && yarn re:build && yarn tests && webpack",
+    "test": "yarn prerelease && yarn tests",
+    "prerelease": "yarn re:clean && yarn re:build && webpack",
     "release": "npmpub"
   },
   "dependencies": {
