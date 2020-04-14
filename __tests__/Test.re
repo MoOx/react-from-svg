@@ -29,25 +29,25 @@ let testAll = svg => {
 };
 
 describe("simple svg", () =>
-  readFileSync("./test/simple.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/simple.svg", `utf8)->testAll
 );
 
 describe("edge case width svg", () =>
-  readFileSync("./test/edge-case-width.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/edge-case-width.svg", `utf8)->testAll
 );
 
 describe("clean & minimal svg", () =>
-  readFileSync("./test/clean.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/clean.svg", `utf8)->testAll
 );
 
 describe("sketch export", () =>
-  readFileSync("./test/sketch-export.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/sketch-export.svg", `utf8)->testAll
 );
 
 describe("with fill", () =>
-  readFileSync("./test/with-fill.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/with-fill.svg", `utf8)->testAll
 );
 
 describe("with stroke", () =>
-  readFileSync("./test/with-stroke.svg", `utf8)->testAll
+  readFileSync("./__tests__/fixtures/with-stroke.svg", `utf8)->testAll
 );

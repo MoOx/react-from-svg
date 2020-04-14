@@ -6,8 +6,8 @@
     "react-jsx": 3
   },
   "package-specs": {
-    "module": "commonjs"
-    // "in-source": true
+    "module": "commonjs",
+    "in-source": true
   },
   "suffix": ".bs.js",
   "sources": [
@@ -20,6 +20,6 @@
       "type": "dev"
     }
   ],
-  "bs-dependencies": ["reason-future", "reason-react"],
+  "bs-dependencies": ["reason-future"],
   "bs-dev-dependencies": ["@glennsl/bs-jest"]
 }

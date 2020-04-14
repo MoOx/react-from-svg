@@ -21,37 +21,40 @@
     "react-from-svg": "./bin.js"
   },
   "files": [
-    "src",
-    "!test",
-    "bin.js",
-    "bsconfig.json"
+    "*",
+    "!.github",
+    "!.DS_Store",
+    "!**/*.bs.js",
+    "!.merlin",
+    "!lib/bs",
+    "!lib/ocaml"
   ],
   "scripts": {
-    "postinstall": "bsb -clean-world -make-world",
+    "prepare": "bsb -clean-world -make-world && webpack",
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "tests": "jest \"__tests__/(.*).proxy.js\"",
-    "test": "yarn re:clean && yarn re:build && yarn tests",
+    "tests": "jest",
+    "test": "yarn re:clean && yarn re:build && yarn tests && webpack",
     "release": "npmpub"
   },
   "dependencies": {
-    "bs-platform": "^7.2.2",
     "camelcase": "^6.0.0",
     "glob": "^7.1.3",
     "meow": "^6.1.0",
-    "mkdirp": "^0.5.1",
-    "reason-future": "^2.4.0",
-    "reason-react": "^0.7.0"
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.5.1",
+    "bs-platform": "^7.2.2",
     "husky": "^4.2.0",
     "jest": "^25.3.0",
     "lint-staged": "^10.0.2",
     "npmpub": "^5.0.0",
     "prettier": "^1.19.1",
-    "trash-cli": "^1.4.0"
+    "reason-future": "^2.4.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "prettier": {
     "trailingComma": "all",

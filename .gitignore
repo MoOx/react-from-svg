@@ -12,3 +12,6 @@ package-lock.json
 **/lib/ocaml
 **/.merlin
 *.bs.js
+
+# webpack build
+dist
