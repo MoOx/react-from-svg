@@ -2,6 +2,9 @@ open Node;
 open Belt;
 
 [@bs.module "mkdirp"] external mkdirpSync: string => unit = "sync";
+type camelCaseOptions = {pascalCase: bool};
+[@bs.module]
+external camelCase: (string, camelCaseOptions) => string = "camelcase";
 
 let root = Process.cwd();
 let sep = Path.sep;
@@ -28,9 +31,12 @@ let shortenFilenames = (sourcePath, files) => {
     {
       ...file,
       name:
-        file.name
-        |> Js.String.replace(sourcePath ++ "/", "")
-        |> Js.String.replace(".svg", ""),
+        (
+          file.name
+          |> Js.String.replace(sourcePath ++ "/", "")
+          |> Js.String.replace(".svg", "")
+        )
+        ->camelCase({pascalCase: true}),
     }
   );
 };
@@ -58,7 +64,6 @@ let transformFiles =
     (files, file) => {
       let trsf =
         file.content->transformSvg(~removeFill, ~removeStroke, ~commonjs);
-      Js.log2(withNative, withWeb);
       switch (withNative, withWeb) {
       | (false, false) => files
       | (true, false) =>
@@ -138,7 +143,6 @@ type flags = {
 };
 
 let make = ((sourcePath, outputPath), flags) => {
-  Js.log2("flags", flags);
   let futureFiles =
     Path.join([|sourcePath, "*.svg"|])
     ->get
