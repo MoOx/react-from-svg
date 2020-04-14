@@ -7,9 +7,7 @@ let export = (svgOutput, commonjs) =>
   return ($svgOutput);
 }|j}
     : {j|export default ({width, height, fill, stroke}) => {
-  return (
-$svgOutput
-  );
+  return ($svgOutput);
 }|j};
 
 let web = (svgOutput, commonjs) =>
@@ -44,26 +42,27 @@ let importReactNativeSvg = commonjs =>
 } = require('react-native-svg')|j}
     : {j|import Svg, {
   Circle,
+  ClipPath,
+  Defs,
   Ellipse,
+  ForeignObject,
   G,
-  Text,
-  TSpan as Tspan,
-  TextPath,
+  Image,
+  Line,
+  LinearGradient,
+  Marker,
+  Mask,
   Path,
+  Pattern,
   Polygon,
   Polyline,
-  Line,
-  Rect,
-  Use,
-  Image,
-  Symbol,
-  Defs,
-  LinearGradient,
   RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
+  Rect,
+  Symbol,
+  Text,
+  TextPath,
+  TSpan as Tspan,
+  Use,
 } from 'react-native-svg'|j};
 
 let native = (svgOutput, commonjs) =>
