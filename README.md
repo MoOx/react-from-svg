@@ -6,7 +6,8 @@
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-3D76C2.svg)](https://github.com/MoOx/react-from-svg)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-6C488A.svg)](https://gitlab.com/MoOx/react-from-svg)
 
-> Turns SVG files into React Native (Web) (+ optional ReasonML) components
+> Transform SVG files into React components, Native and/or Web, JavaScript and
+> ReasonML. Without shitload of dependencies.
 
 ## Install
 
