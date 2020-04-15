@@ -75,7 +75,9 @@ let native = (svgOutput: string, ~commonjs) =>
   ++ export(svgOutput, commonjs)
   ++ sep;
 
-let nativeForReason = (svgOutput: string) => {j|open ReactNativeSvg;
+let nativeForReason = (svgOutput: string) => {
+  let output = svgOutput->AdjustSvg.transformReasonNativeProps;
+  {j|open ReactNativeSvg;
 
 [@react.component]
 let make =
@@ -84,8 +86,9 @@ let make =
       ~height: option(ReactNative.Style.t)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => $svgOutput;
+    ) => $output;
 |j};
+};
 
 let webForReason = (svgOutput: string) => {j|[@react.component]
 let make =

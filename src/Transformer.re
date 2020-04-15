@@ -52,7 +52,6 @@ let transformSvg =
     ->cleanupEnd
     ->(removeFill ? deleteFill : noop)
     ->(removeStroke ? deleteStroke : noop)
-    ->(js ? noop : transformReasonNativeProps)
     ->template
   );
 
