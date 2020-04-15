@@ -2,9 +2,6 @@ open Node;
 open Belt;
 
 [@bs.module "mkdirp"] external mkdirpSync: string => unit = "sync";
-type camelCaseOptions = {pascalCase: bool};
-[@bs.module]
-external camelCase: (string, camelCaseOptions) => string = "camelcase";
 
 let root = Process.cwd();
 let sep = Path.sep;
@@ -36,7 +33,7 @@ let shortenFilenames = (sourcePath, files) => {
           |> Js.String.replace(sourcePath ++ "/", "")
           |> Js.String.replace(".svg", "")
         )
-        ->camelCase({pascalCase: true}),
+        ->Case.toPascal,
     }
   );
 };
@@ -44,53 +41,119 @@ let shortenFilenames = (sourcePath, files) => {
 let noop = s => s;
 
 let transformSvg =
-    (svg, ~removeFill, ~removeStroke, ~commonjs, ~template, ~pascalCaseTag) =>
+    (svg, ~removeFill, ~removeStroke, ~pascalCaseTag, ~js, ~template) =>
   AdjustSvg.(
     svg
     ->cleanupStart
-    ->prepareProps
+    ->prepareSvgProps
+    ->(js ? injectSvgJsProps : injectSvgReasonProps)
     ->dashToCamelCaseProps
     ->(pascalCaseTag ? tagToPascalCase : noop)
     ->cleanupEnd
     ->(removeFill ? deleteFill : noop)
     ->(removeStroke ? deleteStroke : noop)
-    ->template(commonjs)
+    ->(js ? noop : transformReasonNativeProps)
+    ->template
   );
 
 let transformFiles =
-    (files, ~withNative, ~withWeb, ~removeFill, ~removeStroke, ~commonjs) => {
+    (
+      files,
+      ~withNative,
+      ~withWeb,
+      ~withNativeForReason,
+      ~withWebForReason,
+      ~removeFill,
+      ~removeStroke,
+      ~commonjs,
+    ) => {
   files->Array.reduce(
     [||],
     (files, file) => {
-      let trsf =
-        file.content->transformSvg(~removeFill, ~removeStroke, ~commonjs);
-      switch (withNative, withWeb) {
-      | (false, false) => files
-      | (true, false) =>
+      let trsf = file.content->transformSvg(~removeFill, ~removeStroke);
+      let trsfNative = () =>
+        trsf(
+          ~js=true,
+          ~pascalCaseTag=true,
+          ~template=Templates.native(~commonjs),
+        );
+      let trsfWeb = () =>
+        trsf(
+          ~js=true,
+          ~pascalCaseTag=false,
+          ~template=Templates.web(~commonjs),
+        );
+      let trsfNativeForR = () =>
+        trsf(
+          ~js=false,
+          ~pascalCaseTag=true,
+          ~template=Templates.nativeForReason,
+        );
+      let trsfWebForR = () =>
+        trsf(
+          ~js=false,
+          ~pascalCaseTag=false,
+          ~template=Templates.webForReason,
+        );
+      switch (withNative, withWeb, withNativeForReason, withWebForReason) {
+      | (false, false, false, false) => files
+      | (true, false, false, false) =>
         files->Array.concat([|
-          {
-            name: file.name,
-            content: trsf(~template=Templates.native, ~pascalCaseTag=true),
-          },
+          {name: file.name ++ ".js", content: trsfNative()},
         |])
-      | (false, true) =>
+      | (false, true, false, false) =>
         files->Array.concat([|
-          {
-            name: file.name,
-            content: trsf(~template=Templates.web, ~pascalCaseTag=false),
-          },
+          {name: file.name ++ ".js", content: trsfWeb()},
         |])
-      | (true, true) =>
+      | (true, true, false, false) =>
         files->Array.concat([|
-          {
-            name: file.name,
-            content: trsf(~template=Templates.native, ~pascalCaseTag=true),
-          },
-          {
-            name: file.name ++ ".web",
-            content: trsf(~template=Templates.web, ~pascalCaseTag=false),
-          },
+          {name: file.name ++ ".js", content: trsfNative()},
+          {name: file.name ++ ".web.js", content: trsfWeb()},
         |])
+      | (false, false, true, false) =>
+        files->Array.concat([|
+          {name: file.name ++ ".re", content: trsfNativeForR()},
+        |])
+      | (false, false, false, true) =>
+        files->Array.concat([|
+          {name: file.name ++ ".re", content: trsfWebForR()},
+        |])
+      | (true, true, true, false) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfNative()},
+          {name: file.name ++ ".web.js", content: trsfWeb()},
+          {name: file.name ++ ".re", content: trsfNativeForR()},
+        |])
+      | (true, true, false, true) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfNative()},
+          {name: file.name ++ ".web.js", content: trsfWeb()},
+          {name: file.name ++ ".re", content: trsfWebForR()},
+        |])
+      | (true, false, true, false) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfNative()},
+          {name: file.name ++ ".re", content: trsfNativeForR()},
+        |])
+      | (true, false, false, true) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfNative()},
+          {name: file.name ++ ".re", content: trsfWebForR()},
+        |])
+      | (false, true, true, false) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfWeb()},
+          {name: file.name ++ ".re", content: trsfNativeForR()},
+        |])
+      | (false, true, false, true) =>
+        files->Array.concat([|
+          {name: file.name ++ ".js", content: trsfWeb()},
+          {name: file.name ++ ".re", content: trsfWebForR()},
+        |])
+      | (_, _, true, true) =>
+        failwith(
+          "For now --with-native-for-reason & --with-web-for-reason cannot be used at the same time.",
+        )
       };
     },
   );
@@ -98,36 +161,9 @@ let transformFiles =
 
 let write = (outputPath, files) => {
   files->Array.forEach(file => {
-    let filename = Path.join([|outputPath, "SVG" ++ file.name ++ ".js"|]);
+    let filename = Path.join([|outputPath, "SVG" ++ file.name|]);
     mkdirpSync(Path.dirname(filename));
     Fs.writeFileAsUtf8Sync(filename, file.content);
-  });
-  files;
-};
-
-let writeRe = (outputPath, modulePath, files) => {
-  files->Array.forEach(file => {
-    let filename = file.name;
-    let svgJsName = {j|SVG$filename.js|j};
-    let svgReName = {j|SVG$filename.re|j};
-    let pathname = Path.join([|outputPath, svgReName|]);
-    mkdirpSync(Path.dirname(pathname));
-    let bsModulePath =
-      modulePath
-      ->Option.map(path => path->Path.join2(svgJsName))
-      // don't use join as path.join(".", "smth") gives "smth"
-      ->Option.getWithDefault("." ++ sep ++ svgJsName);
-
-    let reWrapper = {j|
-[@react.component] [@bs.module "$bsModulePath"]
-external make: (
-  ~width: ReactFromSvg.Size.t=?,
-  ~height: ReactFromSvg.Size.t=?,
-  ~fill: string=?,
-  ~stroke: string=?
-) => React.element  = "default";
-|j};
-    Fs.writeFileAsUtf8Sync(pathname, reWrapper);
   });
   files;
 };
@@ -135,11 +171,11 @@ external make: (
 type flags = {
   withNative: Js.Undefined.t(bool),
   withWeb: Js.Undefined.t(bool),
-  withReason: Js.Undefined.t(bool),
+  withNativeForReason: Js.Undefined.t(bool),
+  withWebForReason: Js.Undefined.t(bool),
   removeFill: Js.Undefined.t(bool),
   removeStroke: Js.Undefined.t(bool),
   commonjs: Js.Undefined.t(bool),
-  bsModulePath: Js.Undefined.t(string),
 };
 
 let make = ((sourcePath, outputPath), flags) => {
@@ -159,6 +195,14 @@ let make = ((sourcePath, outputPath), flags) => {
             flags.withWeb
             ->Js.Undefined.toOption
             ->Option.getWithDefault(false),
+          ~withNativeForReason=
+            flags.withNativeForReason
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
+          ~withWebForReason=
+            flags.withWebForReason
+            ->Js.Undefined.toOption
+            ->Option.getWithDefault(false),
           ~removeFill=
             flags.removeFill
             ->Js.Undefined.toOption
@@ -176,17 +220,6 @@ let make = ((sourcePath, outputPath), flags) => {
     ->Future.tap(files => Js.log2("Files transformed", files->Array.length))
     ->Future.map(write(outputPath))
     ->Future.tap(files => Js.log2("Files written", files->Array.length));
-
-  if (flags.withReason->Js.Undefined.toOption->Option.getWithDefault(false)) {
-    futureFiles
-    ->Future.map(
-        writeRe(outputPath, flags.bsModulePath->Js.Undefined.toOption),
-      )
-    ->Future.tap(files =>
-        Js.log2("Files written (reason wrappers)", files->Array.length)
-      )
-    ->ignore;
-  };
 
   futureFiles;
 };

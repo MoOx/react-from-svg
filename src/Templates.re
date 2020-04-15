@@ -1,3 +1,5 @@
+type svgOutput = string;
+
 let sep = ";\n";
 let importReact = commonjs =>
   commonjs ? "const React = require('react')" : "import React from 'react'";
@@ -10,7 +12,7 @@ let export = (svgOutput, commonjs) =>
   return ($svgOutput);
 }|j};
 
-let web = (svgOutput, commonjs) =>
+let web = (svgOutput: string, ~commonjs) =>
   importReact(commonjs) ++ sep ++ export(svgOutput, commonjs) ++ sep;
 
 let importReactNativeSvg = commonjs =>
@@ -65,10 +67,32 @@ let importReactNativeSvg = commonjs =>
   Use,
 } from 'react-native-svg'|j};
 
-let native = (svgOutput, commonjs) =>
+let native = (svgOutput: string, ~commonjs) =>
   importReact(commonjs)
   ++ sep
   ++ importReactNativeSvg(commonjs)
   ++ sep
   ++ export(svgOutput, commonjs)
   ++ sep;
+
+let nativeForReason = (svgOutput: string) => {j|open ReactNativeSvg;
+
+[@react.component]
+let make =
+    (
+      ~width: option(ReactNative.Style.t)=?,
+      ~height: option(ReactNative.Style.t)=?,
+      ~fill: option(string)=?,
+      ~stroke: option(string)=?,
+    ) => $svgOutput;
+|j};
+
+let webForReason = (svgOutput: string) => {j|[@react.component]
+let make =
+    (
+      ~width: option(string)=?,
+      ~height: option(string)=?,
+      ~fill: option(string)=?,
+      ~stroke: option(string)=?,
+    ) => $svgOutput;
+|j};

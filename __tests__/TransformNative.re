@@ -3,14 +3,16 @@ open Node.Fs;
 open Jest;
 open Expect;
 
+let fixtures = "./__tests__/__fixtures__";
+
 let snap = (svg, ~removeFill, ~removeStroke) => {
   svg
   ->Transformer.transformSvg(
       ~removeFill,
       ~removeStroke,
-      ~commonjs=false,
+      ~js=true,
       ~pascalCaseTag=true,
-      ~template=Templates.native,
+      ~template=Templates.native(~commonjs=false),
     )
   ->expect
   ->toMatchSnapshot;
@@ -29,25 +31,25 @@ let testAll = svg => {
 };
 
 describe("simple svg", () =>
-  readFileSync("./__tests__/fixtures/simple.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/simple.svg", `utf8)->testAll
 );
 
 describe("edge case width svg", () =>
-  readFileSync("./__tests__/fixtures/edge-case-width.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/edge-case-width.svg", `utf8)->testAll
 );
 
 describe("clean & minimal svg", () =>
-  readFileSync("./__tests__/fixtures/clean.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/clean.svg", `utf8)->testAll
 );
 
 describe("sketch export", () =>
-  readFileSync("./__tests__/fixtures/sketch-export.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/sketch-export.svg", `utf8)->testAll
 );
 
 describe("with fill", () =>
-  readFileSync("./__tests__/fixtures/with-fill.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/with-fill.svg", `utf8)->testAll
 );
 
 describe("with stroke", () =>
-  readFileSync("./__tests__/fixtures/with-stroke.svg", `utf8)->testAll
+  readFileSync(fixtures ++ "/with-stroke.svg", `utf8)->testAll
 );

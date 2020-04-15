@@ -28,43 +28,47 @@ Usage
     $ react-from-svg <sourcePath> <outputPath> [--with-native|--with-web]
 
   Options
-    --with-native, -native  Output code for react-native-svg
-    --with-web, -web        Output code for DOM. If --with-native is also used, will be output as .web.js files
-    --with-reason, -bs      Output ReasonML bindings code
-    --remove-fill, -rf      Remove all 'fill' properties from SVGs, convenient for icons
-    --remove-stroke, -rs    Remove all 'stroke' properties from SVGs, convenient for icons
-    --commonjs, -cjs        Export as commonjs instead of es6 import/export
-    --bs-module-path, -bsp  Allow to customise ReasonML output path
+    --with-native, -native                Output code for react-native-svg
+    --with-web, -web                      Output code for DOM. If --with-native is also used, will be output as .web.js files
+    --with-native-for-reason, -bsnative   Output code for @reason-react-native/svg
+    --with-web-for-reason, -bsnweb        Output code for reason-react
+    --remove-fill, -rf                    Remove all 'fill' properties from SVGs, convenient for icons
+    --remove-stroke, -rs                  Remove all 'stroke' properties from SVGs, convenient for icons
+    --commonjs, -cjs                      Export as commonjs instead of es6 import/export
 
   Example
-    $ react-from-svg assets/svgs src/Svgs --remove-fill
+    $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
 ```
 
-### Examples
+## Requirements
 
-#### React DOM, no options
+### `--with-web`
 
-```console
-react-from-svg assets/svgs src/Svgs --with-web
-```
+Need you to install have:
 
-#### React Native with fill svg props removed
+- [React](https://reactjs.org)
 
-```console
-react-from-svg assets/svgs src/Svgs --with-native --remove-fill
-```
+### `--with-web-for-reason`
 
-#### React Native + ReasonML bindings SVGs
+Need you to install have:
 
-```console
-react-from-svg assets/svgs src/Svgs --with-native --with-reason
-```
+- [React](https://reactjs.org)
+- [`reason-react`](https://reasonml.github.io/reason-react/)
 
-#### React Native + ReasonML bindings SVGs and absolute path
+### `--with-native`
 
-It's usefull if you defined a webpack alias and you don't generate your
-bucklescript output `"in-source"`
+Need you to install have:
 
-```console
-react-from-svg assets/svgs src/Svgs --with-reason --reason-module-path=./src/components
-```
+- [React](https://reactjs.org)
+- [React Native](https://reactnative.dev) (or an alternative platform like
+  [React Native Web](https://github.com/necolas/react-native-web))
+- [`react-native-svg`](https://github.com/react-native-community/react-native-svg)
+
+### `--with-native-for-reason`
+
+In addition to `--with-native` requirements, you need to install & add as
+`bs-dependencies` in your `bsconfig.json`:
+
+- [`reason-react`](https://reasonml.github.io/reason-react/)
+- [`reason-react-native`](https://reason-react-native.github.io)
+- [`@reason-react-native/svg`](https://github.com/reason-react-native/svg)

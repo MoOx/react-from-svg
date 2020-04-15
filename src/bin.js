@@ -7,33 +7,38 @@ const cli = meow(
     $ react-from-svg <sourcePath> <outputPath> [--with-native|--with-web]
 
   Options
-    --with-native, -native  Output code for react-native-svg
-    --with-web, -web        Output code for DOM. If --with-native is also used, will be output as .web.js files
-    --with-reason, -bs      Output ReasonML bindings code
-    --remove-fill, -rf      Remove all 'fill' properties from SVGs, convenient for icons
-    --remove-stroke, -rs    Remove all 'stroke' properties from SVGs, convenient for icons
-    --commonjs, -cjs        Export as commonjs instead of es6 import/export
-    --bs-module-path, -bsp  Allow to customise ReasonML output path
+    --with-native, -native                Output code for react-native-svg
+    --with-web, -web                      Output code for DOM. If --with-native is also used, will be output as .web.js files
+    --with-native-for-reason, -bsnative   Output code for @reason-react-native/svg
+    --with-web-for-reason, -bsnweb        Output code for reason-react
+    --remove-fill, -rf                    Remove all 'fill' properties from SVGs, convenient for icons
+    --remove-stroke, -rs                  Remove all 'stroke' properties from SVGs, convenient for icons
+    --commonjs, -cjs                      Export as commonjs instead of es6 import/export
 
   Example
-    $ react-from-svg assets/svgs src/Svgs --remove-fill
+    $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
 `,
   {
     flags: {
       "with-native": { type: "boolean", alias: "native" },
       "with-web": { type: "boolean", alias: "web" },
-      "with-reason": { type: "boolean", alias: "bs" },
+      "with-native-for-reason": { type: "boolean", alias: "bsnative" },
+      "with-web-for-reason": { type: "boolean", alias: "bsweb" },
       "remove-fill": { type: "boolean", alias: "rf" },
       "remove-stroke": { type: "boolean", alias: "rs" },
       commonjs: { type: "boolean", alias: "cjs" },
-      "bs-module-path": { type: "string", alias: "bsp" },
     },
   },
 );
 
-if (cli.flags.withNative === undefined && cli.flags.withWeb === undefined) {
+if (
+  cli.flags.withNative === undefined &&
+  cli.flags.withWeb === undefined &&
+  cli.flags.withNativeForReason === undefined &&
+  cli.flags.withWebForReason === undefined
+) {
   console.error(
-    "You should at least choose an option between --with-native or --with web!",
+    "You should at least choose an output option (one of --with-*)!",
   );
   cli.showHelp();
   process.exit(1);

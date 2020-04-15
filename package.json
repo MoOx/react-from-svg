@@ -33,7 +33,10 @@
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
     "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "tests": "jest",
+    "tests:jest": "jest",
+    "tests:reason": "./bin.js __tests__/__fixtures__ __tests__/__fixtures__/components --with-native-for-reason",
+    "posttests:reason": "find __tests__/__fixtures__/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
+    "tests": "yarn tests:jest && yarn tests:reason",
     "test": "yarn prerelease && yarn tests",
     "prerelease": "yarn re:clean && yarn re:build && webpack",
     "release": "npmpub"
@@ -74,5 +77,10 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/__fixtures__"
+    ]
   }
 }
