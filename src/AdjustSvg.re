@@ -63,10 +63,11 @@ let deleteFill = svg =>
 let deleteStroke = svg =>
   svg->Js.String2.replaceByRe([%re "/ stroke=\"[^\\\"]*\"/g"], "");
 
-let polyCamel = (_matchPart, p1, p2, _offset, _wholeString) =>
-  p1 ++ "=`" ++ p2->Case.toCamel;
-
-let toPolyCamel = (s, re) => s->Js.String2.unsafeReplaceBy2(re, polyCamel);
+let toPolyCamel = (s, re) =>
+  s->Js.String2.unsafeReplaceBy2(
+    re, (_matchPart, p1, p2, _offset, _wholeString) =>
+    p1 ++ "=`" ++ p2->Case.toCamel
+  );
 
 let transformReasonNativeProps = svg =>
   svg
@@ -122,3 +123,26 @@ let transformReasonNativeProps = svg =>
         "/(vectorEffect)=\"(none|default|non-scaling-stroke|inherit|uri)\"/g"
       ],
     );
+
+type t = string;
+[@bs.send]
+external unsafeReplaceBy4:
+  (t, Js_re.t, [@bs.uncurry] ((t, t, t, t, t, int, t) => t)) => t =
+  "replace";
+
+let undefinedString: string = Js.undefined->Obj.magic;
+
+let transformReasonNativeSizeProps = svg =>
+  svg->unsafeReplaceBy4(
+    [%re
+      "/(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"([0-9]+)(\\.[0-9]+)?(%)?\"/g"
+    ],
+    (_matchPart, p1, p2, p3, p4, _offset, _wholeString) => {
+    p1
+    ++ "={"
+    ++ p2
+    ++ (p3 !== undefinedString ? p3 : ".")
+    ++ "->"
+    ++ (p4 === "%" ? "pct" : "dp")
+    ++ "}"
+  });

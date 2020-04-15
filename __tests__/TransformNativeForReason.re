@@ -53,3 +53,24 @@ describe("with fill", () =>
 describe("with stroke", () =>
   readFileSync(fixtures ++ "/with-stroke.svg", `utf8)->testAll
 );
+
+describe("reason native svg tweaks", () => {
+  test("%", () =>
+    {j|<svg><circle cx="2%" /></svg>|j}
+    ->snap(~removeFill=true, ~removeStroke=true)
+  );
+
+  test("% with decimals", () =>
+    {j|<svg><circle cx="2.45%" /></svg>|j}
+    ->snap(~removeFill=true, ~removeStroke=true)
+  );
+
+  test("float", () =>
+    {j|<svg><circle cx="2" /></svg>|j}
+    ->snap(~removeFill=true, ~removeStroke=true)
+  );
+  test("float with decimals", () =>
+    {j|<svg><circle cx="12.96" /></svg>|j}
+    ->snap(~removeFill=true, ~removeStroke=true)
+  );
+});

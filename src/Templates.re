@@ -76,14 +76,18 @@ let native = (svgOutput: string, ~commonjs) =>
   ++ sep;
 
 let nativeForReason = (svgOutput: string) => {
-  let output = svgOutput->AdjustSvg.transformReasonNativeProps;
-  {j|open ReactNativeSvg;
+  let output =
+    AdjustSvg.(
+      svgOutput->transformReasonNativeProps->transformReasonNativeSizeProps
+    );
+  {j|open ReactNative.Style;
+open ReactNativeSvg;
 
 [@react.component]
 let make =
     (
-      ~width: option(ReactNative.Style.size)=?,
-      ~height: option(ReactNative.Style.size)=?,
+      ~width: option(size)=?,
+      ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => $output;
