@@ -82,8 +82,8 @@ let nativeForReason = (svgOutput: string) => {
 [@react.component]
 let make =
     (
-      ~width: option(ReactNative.Style.t)=?,
-      ~height: option(ReactNative.Style.t)=?,
+      ~width: option(ReactNative.Style.size)=?,
+      ~height: option(ReactNative.Style.size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => $output;
