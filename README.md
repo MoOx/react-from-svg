@@ -45,8 +45,8 @@ SVG components:
 
 - `width`
 - `height`
-- `fill` (if you use `--remove-fill`)
-- `stroke` (if you use `--remove-stroke`)
+- `fill` (can be removed with `--remove-fill`)
+- `stroke` (can be removed with `--remove-stroke`)
 
 ⚠️ To see what you can expect from the transformations,
 [check our snapshots](./__tests__/__snapshots__) 👀
