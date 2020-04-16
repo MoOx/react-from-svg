@@ -142,7 +142,7 @@ let transformReasonNativeSizeProps = svg =>
     ++ "={"
     ++ p2
     ++ (p3 !== undefinedString ? p3 : ".")
-    ++ "->"
+    ++ "->Style."
     ++ (p4 === "%" ? "pct" : "dp")
     ++ "}"
   });

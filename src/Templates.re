@@ -80,7 +80,7 @@ let nativeForReason = (svgOutput: string) => {
     AdjustSvg.(
       svgOutput->transformReasonNativeProps->transformReasonNativeSizeProps
     );
-  {j|open ReactNative.Style;
+  {j|open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]

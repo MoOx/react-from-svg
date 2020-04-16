@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`clean & minimal svg all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -16,7 +16,7 @@ let make =
 `;
 
 exports[`clean & minimal svg remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -31,7 +31,7 @@ let make =
 `;
 
 exports[`clean & minimal svg remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -46,7 +46,7 @@ let make =
 `;
 
 exports[`edge case width svg all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -62,7 +62,7 @@ let make =
 `;
 
 exports[`edge case width svg remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -78,7 +78,7 @@ let make =
 `;
 
 exports[`edge case width svg remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -94,7 +94,7 @@ let make =
 `;
 
 exports[`reason native svg tweaks % 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -104,12 +104,12 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.->pct} /> </Svg>;
+    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.->Style.pct} /> </Svg>;
 "
 `;
 
 exports[`reason native svg tweaks % with decimals 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -119,12 +119,12 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.45->pct} /> </Svg>;
+    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.45->Style.pct} /> </Svg>;
 "
 `;
 
 exports[`reason native svg tweaks float 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -134,12 +134,12 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.->dp} /> </Svg>;
+    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={2.->Style.dp} /> </Svg>;
 "
 `;
 
 exports[`reason native svg tweaks float with decimals 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -149,12 +149,12 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={12.96->dp} /> </Svg>;
+    ) => <Svg ?width ?height ?fill ?stroke> <Circle cx={12.96->Style.dp} /> </Svg>;
 "
 `;
 
 exports[`simple svg all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -164,13 +164,13 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->dp}/> </Svg>
+    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->Style.dp}/> </Svg>
 ;
 "
 `;
 
 exports[`simple svg remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -180,13 +180,13 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->dp}/> </Svg>
+    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->Style.dp}/> </Svg>
 ;
 "
 `;
 
 exports[`simple svg remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -196,13 +196,13 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->dp}/> </Svg>
+    ) => <Svg viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48\\" fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth={32.->Style.dp}/> </Svg>
 ;
 "
 `;
 
 exports[`sketch export all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -213,13 +213,13 @@ let make =
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => 
-<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" strokeWidth={1.->dp} fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fillRule=\`nonzero> </Path> </G> </Svg>
+<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" strokeWidth={1.->Style.dp} fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fillRule=\`nonzero> </Path> </G> </Svg>
 ;
 "
 `;
 
 exports[`sketch export remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -230,13 +230,13 @@ let make =
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => 
-<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" stroke=\\"none\\" strokeWidth={1.->dp} fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fillRule=\`nonzero> </Path> </G> </Svg>
+<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" stroke=\\"none\\" strokeWidth={1.->Style.dp} fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fillRule=\`nonzero> </Path> </G> </Svg>
 ;
 "
 `;
 
 exports[`sketch export remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -247,13 +247,13 @@ let make =
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => 
-<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" strokeWidth={1.->dp} fill=\\"none\\" fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fill=\\"#000000\\" fillRule=\`nonzero> </Path> </G> </Svg>
+<Svg  viewBox=\\"0 0 97 171\\" ?width ?height ?fill ?stroke> <G id=\\"Page-1\\" strokeWidth={1.->Style.dp} fill=\\"none\\" fillRule=\`evenodd> <Path d=\\"M9.7890625,170.355469 C12.328125,170.355469 14.4765625,169.378906 16.1367188,167.71875 L93.578125,92.0351562 C95.4335938,90.1796875 96.4101562,87.9335938 96.4101562,85.4921875 C96.4101562,82.953125 95.4335938,80.609375 93.578125,78.9492188 L16.234375,3.36328125 C14.4765625,1.60546875 12.328125,0.62890625 9.7890625,0.62890625 C4.7109375,0.62890625 0.90234375,4.53515625 0.90234375,9.61328125 C0.90234375,11.9570312 1.87890625,14.3007813 3.44140625,15.9609375 L74.5351562,85.4921875 L3.44140625,155.023438 C1.87890625,156.683594 0.90234375,158.929688 0.90234375,161.371094 C0.90234375,166.449219 4.7109375,170.355469 9.7890625,170.355469 Z\\" id=\\"chevron\\" fill=\\"#000000\\" fillRule=\`nonzero> </Path> </G> </Svg>
 ;
 "
 `;
 
 exports[`with fill all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -268,7 +268,7 @@ let make =
 `;
 
 exports[`with fill remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -283,7 +283,7 @@ let make =
 `;
 
 exports[`with fill remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -298,7 +298,7 @@ let make =
 `;
 
 exports[`with stroke all options 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -308,13 +308,13 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->dp} y1={160.->dp} x2={256.->dp} y2={448.->dp} strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
+    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->Style.dp} y1={160.->Style.dp} x2={256.->Style.dp} y2={448.->Style.dp} strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
 ;
 "
 `;
 
 exports[`with stroke remove-fill 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -324,13 +324,13 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->dp} y1={160.->dp} x2={256.->dp} y2={448.->dp} stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
+    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->Style.dp} y1={160.->Style.dp} x2={256.->Style.dp} y2={448.->Style.dp} stroke=\\"#000\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
 ;
 "
 `;
 
 exports[`with stroke remove-stroke 1`] = `
-"open ReactNative.Style;
+"open ReactNative;
 open ReactNativeSvg;
 
 [@react.component]
@@ -340,7 +340,7 @@ let make =
       ~height: option(size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
-    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->dp} y1={160.->dp} x2={256.->dp} y2={448.->dp} fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
+    ) => <Svg  viewBox=\\"0 0 512 512\\" ?width ?height ?fill ?stroke> <Path d=\\"M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z\\" fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> <Line x1={256.->Style.dp} y1={160.->Style.dp} x2={256.->Style.dp} y2={448.->Style.dp} fill=\\"none\\" strokeLinecap=\`round strokeLinejoin=\`round strokeWidth=\\"32px\\"/> </Svg>
 ;
 "
 `;
