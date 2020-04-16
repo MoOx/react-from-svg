@@ -64,12 +64,10 @@
   },
   "lint-staged": {
     "*.{md,json,js,css}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "*.{re,rei}": [
-      "bsrefmt --in-place",
-      "git add"
+      "bsrefmt --in-place"
     ]
   },
   "husky": {
