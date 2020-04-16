@@ -1,7 +1,7 @@
 {
   "name": "react-from-svg",
   "description": "Transform SVG files into React components, Native and/or Web, JavaScript and ReasonML. Without shitload of dependencies.",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "keywords": [
@@ -32,7 +32,6 @@
   "scripts": {
     "re:clean": "bsb -clean-world",
     "re:build": "bsb -make-world",
-    "svg:format": "find test/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "tests:jest": "jest",
     "tests:reason": "./bin.js __tests__/__fixtures__ __tests__/__fixtures__/components --with-native-for-reason",
     "posttests:reason": "find __tests__/__fixtures__/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",

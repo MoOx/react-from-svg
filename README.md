@@ -1,4 +1,4 @@
-# react-from-svg
+# React from SVG
 
 [![Build Status](https://github.com/MoOx/react-from-svg/workflows/Build/badge.svg)](https://github.com/MoOx/react-from-svg/actions)
 [![Version](https://img.shields.io/npm/v/react-from-svg.svg)](https://www.npmjs.com/react-from-svg)
@@ -39,6 +39,17 @@ Usage
   Example
     $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
 ```
+
+Generated components will have the following props that you can inject to the
+SVG components:
+
+- `width`
+- `height`
+- `fill` (if you use `--remove-fill`)
+- `stroke` (if you use `--remove-stroke`)
+
+⚠️ To see what you can expect from the transformations,
+[check our snapshots](./__tests__/__snapshots__) 👀
 
 ## Requirements
 

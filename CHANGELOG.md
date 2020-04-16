@@ -1,5 +1,61 @@
 # Changelog of `react-from-svg`
 
+## 4.0.0 - 2020-04-14
+
+In addition to some fixes, this release introduce a breaking change for the CLI
+Now you must use one of the `--with-*` options options to have output for you
+desired platform/language:
+
+- `--with-native`: Output code using React Native & `react-native-svg`
+  (compatible with React Native Web)
+- `--with-web`: Output code using React DOM. If `--with-native` is also used,
+  will be output as `.web.js` files
+- `--with-native-for-reason`: Output code for Reason React Native &
+  `@reason-react-native/svg`
+- `--with-web-for-reason`: Output code for Reason React DOM
+
+CLI has also been improved a little to be more gentle & can offer some `--help`.
+
+Also, now, no `postinstall` step are necessary for this package as we ship a
+bundled version.
+
+### 💥 Breaking Changes
+
+- Add `--with-native`, & `--with-web` options
+  ([070a85f](https://github.com/MoOx/react-from-svg/commit/070a85f)) by @MoOx
+- Remove `--with-reason` & `--bs-module-path`
+  ([8034065](https://github.com/MoOx/react-from-svg/commit/8034065)) by @MoOx
+  This change make sense as you can now directly output reason code that are
+  directly svgs, not just bindings (see `--with*-for-reason` new options).
+- Add `--with-native-for-reason`, `--with-web-for-reason`
+  ([8034065](https://github.com/MoOx/react-from-svg/commit/8034065)) by @MoOx
+- File are now renamed to pascale case (eg: `some-file.svg` become
+  `SVGSomeFile.*`)
+  ([c62989f](https://github.com/MoOx/react-from-svg/commit/c62989f)) by @MoOx
+
+### 🐛 BugFixes
+
+- Fix `strokeLinejoin`, `strokeLinecap` & `strokeMiterlimit` props
+  ([#8](https://github.com/MoOx/react-from-svg/pull/8)) by @Freddy03h
+- Fix incorrect replacement for width/height/fill incorrectly removed
+  ([4533c64](https://github.com/MoOx/react-from-svg/commit/4533c64)) by @MoOx
+
+### 🎉 New
+
+- Add `--remove-stroke` option + `stroke` component prop
+  ([#8](https://github.com/MoOx/react-from-svg/pull/8)) by @Freddy03h
+- Add `--commonjs`
+  ([070a85f](https://github.com/MoOx/react-from-svg/commit/070a85f)) by @MoOx
+
+### 🚧 Notable Internal changes
+
+- We now serve the package as a bundle bin to avoid `bs-platform` build on
+  postinstall + artifacts issues
+  ([ed6262c](https://github.com/MoOx/react-from-svg/commit/ed6262c)) by @MoOx
+- Codebase covered by tests (via snapshots) by @MoOx
+- Upgrade to bs-platform 7.2
+  ([#7](https://github.com/MoOx/react-from-svg/pull/7)) by @broerjuang
+
 ## 3.1.0 - 2020-02-18
 
 - Fix TSpan import error  
