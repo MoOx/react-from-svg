@@ -1,6 +1,11 @@
 # Changelog of `react-from-svg`
 
-## 4.0.0 - 2020-04-14
+## 4.0.1 - 2020-04-16
+
+- `--with-native-for-reason`: Avoid bucklescript shadow warnings for
+  `ReactNative.Style.size` by @MoOx
+
+## 4.0.0 - 2020-04-16
 
 In addition to some fixes, this release introduce a breaking change for the CLI
 Now you must use one of the `--with-*` options options to have output for you
