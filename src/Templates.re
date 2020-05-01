@@ -86,8 +86,8 @@ open ReactNativeSvg;
 [@react.component]
 let make =
     (
-      ~width: option(size)=?,
-      ~height: option(size)=?,
+      ~width: option(Style.size)=?,
+      ~height: option(Style.size)=?,
       ~fill: option(string)=?,
       ~stroke: option(string)=?,
     ) => $output;
