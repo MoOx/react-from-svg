@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 4.0.2 - 2020-05-01
+
+- `--with-native-for-reason`: Fix 4.0.1 regression where size is undefined
+
 ## 4.0.1 - 2020-04-16
 
 - `--with-native-for-reason`: Avoid bucklescript shadow warnings for
