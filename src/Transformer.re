@@ -49,7 +49,7 @@ let transformSvg =
     ->(js ? injectSvgJsProps : injectSvgReasonProps)
     ->dashToCamelCaseProps
     ->(pascalCaseTag ? tagToPascalCase : noop)
-    ->cleanupEnd
+    ->(js ? cleanupEndWithoutSpace : cleanupEndWithSpace)
     ->(removeFill ? deleteFill : noop)
     ->(removeStroke ? deleteStroke : noop)
     ->template
