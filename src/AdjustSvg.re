@@ -53,10 +53,13 @@ let tagToPascalCase = svg =>
     "<" ++ p1 ++ p2->Case.toPascal
   );
 
-let cleanupEnd = svg =>
+let cleanupEndWithSpace = svg =>
   svg
   ->Js.String2.replaceByRe([%re "/>\\s+</g"], "> <")
   ->Js.String2.replaceByRe([%re "/></g"], "> <");
+
+let cleanupEndWithoutSpace = svg =>
+  svg->Js.String2.replaceByRe([%re "/>\\s+</g"], "><");
 
 let deleteFill = svg =>
   svg->Js.String2.replaceByRe([%re "/ fill=\"[^\\\"]*\"/g"], "");
