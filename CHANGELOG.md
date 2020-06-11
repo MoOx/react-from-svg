@@ -1,5 +1,11 @@
 # Changelog of `react-from-svg`
 
+## 4.0.3 - 2020-06-11
+
+- `--with-native`: Fix JS output error "Error: Text strings must be rendered
+  within a `<Text>` [#14](https://github.com/MoOx/react-from-svg/pull/14) by
+  @Freddy03h
+
 ## 4.0.2 - 2020-05-01
 
 - `--with-native-for-reason`: Fix 4.0.1 regression where size is undefined
