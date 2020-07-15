@@ -1,5 +1,10 @@
 # Changelog of `react-from-svg`
 
+## 4.0.4 - 2020-07-15
+
+- Add missing `Stop` component
+  [#15](https://github.com/MoOx/react-from-svg/pull/15) by @Naturalclar
+
 ## 4.0.3 - 2020-06-11
 
 - `--with-native`: Fix JS output error "Error: Text strings must be rendered
