@@ -1,8 +1,12 @@
 # Changelog of `react-from-svg`
 
+## 4.0.6 - 2020-08-08
+
+- `--with-native-for-reason`: Fixed unwanted props transformation (eg: opacity) [b69604f](https://github.com/MoOx/react-from-svg/commit/b69604f) by [@MoOx](https://github.com/MoOx)
+
 ## 4.0.5 - 2020-08-08
 
-- `--with-native-for-reason`: Fix untransformed `offset` prop for `Stop` component [cdcbf0e](https://github.com/MoOx/react-from-svg/commit/cdcbf0e) by [@Naturalclar](https://github.com/Naturalclar)
+- `--with-native-for-reason`: Fixed untransformed `offset` prop for `Stop` component [cdcbf0e](https://github.com/MoOx/react-from-svg/commit/cdcbf0e) by [@MoOx](https://github.com/MoOx)
 
 ## 4.0.4 - 2020-07-15
 
