@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 4.0.5 - 2020-08-08
+
+- `--with-native-for-reason`: Fix untransformed `offset` prop for `Stop` component [cdcbf0e](https://github.com/MoOx/react-from-svg/commit/cdcbf0e) by [@Naturalclar](https://github.com/Naturalclar)
+
 ## 4.0.4 - 2020-07-15
 
 - Add missing `Stop` component [#15](https://github.com/MoOx/react-from-svg/pull/15) by [@Naturalclar](https://github.com/Naturalclar)
