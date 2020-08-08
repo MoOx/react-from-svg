@@ -76,54 +76,58 @@ let transformReasonNativeProps = svg =>
   svg
   ->toPolyCamel(
       [%re
-        "/(alignmentBaseline)=\"(baseline|text-bottom|alphabetic|ideographic|middle|central|mathematical|text-top|bottom|center|top|text-before-edge|text-after-edge|before-edge|after-edge|hanging)\"/g"
+        "/\\b(alignmentBaseline)=\"(baseline|text-bottom|alphabetic|ideographic|middle|central|mathematical|text-top|bottom|center|top|text-before-edge|text-after-edge|before-edge|after-edge|hanging)\"/g"
       ],
     )
-  ->toPolyCamel([%re "/(baselineShift)=\"(sub|super|baseline)\"/g"])
-  ->toPolyCamel([%re "/(clipRule)=\"(evenodd|nonzero)\"/g"])
-  ->toPolyCamel([%re "/(fillRule)=\"(evenodd|nonzero)\"/g"])
+  ->toPolyCamel([%re "/\\b(baselineShift)=\"(sub|super|baseline)\"/g"])
+  ->toPolyCamel([%re "/\\b(clipRule)=\"(evenodd|nonzero)\"/g"])
+  ->toPolyCamel([%re "/\\b(fillRule)=\"(evenodd|nonzero)\"/g"])
   ->toPolyCamel(
       [%re
-        "/(fontStretch)=\"(normal|wider|narrower|ultra-condensed|extra-condensed|condensed|semi-condensed|semi-expanded|expanded|extra-expanded|ultra-expanded)\"/g"
+        "/\\b(fontStretch)=\"(normal|wider|narrower|ultra-condensed|extra-condensed|condensed|semi-condensed|semi-expanded|expanded|extra-expanded|ultra-expanded)\"/g"
       ],
     )
-  ->toPolyCamel([%re "/(fontStyle)=\"(normal|italic|oblique)\"/g"])
-  ->toPolyCamel([%re "/(fontVariant)=\"(normal|smallcaps)\"/g"])
-  ->toPolyCamel([%re "/(fontVariantLigatures)=\"(normal|none)\"/g"])
+  ->toPolyCamel([%re "/\\b(fontStyle)=\"(normal|italic|oblique)\"/g"])
+  ->toPolyCamel([%re "/\\b(fontVariant)=\"(normal|smallcaps)\"/g"])
+  ->toPolyCamel([%re "/\\b(fontVariantLigatures)=\"(normal|none)\"/g"])
   ->toPolyCamel(
       [%re
-        "/(fontWeight)=\"(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)\"/g"
-      ],
-    )
-  ->toPolyCamel(
-      [%re "/(gradientUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
-    )
-  ->toPolyCamel([%re "/(lengthAdjust)=\"(spacing|spacingAndGlyphs)\"/g"])
-  ->toPolyCamel([%re "/(markerUnits)=\"(userSpaceOnUse|strokeWidth)\"/g"])
-  ->toPolyCamel(
-      [%re "/(maskContentUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
-    )
-  ->toPolyCamel([%re "/(maskUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"])
-  ->toPolyCamel([%re "/(method)=\"(align|stretch)\"/g"])
-  ->toPolyCamel([%re "/(midLine)=\"(sharp|smooth)\"/g"])
-  ->toPolyCamel(
-      [%re "/(patternContentUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
-    )
-  ->toPolyCamel(
-      [%re "/(patternUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
-    )
-  ->toPolyCamel([%re "/(spacing)=\"(auto|exact)\"/g"])
-  ->toPolyCamel([%re "/(strokeLinecap)=\"(butt|square|round)\"/g"])
-  ->toPolyCamel([%re "/(strokeLinejoin)=\"(miter|bevel|round)\"/g"])
-  ->toPolyCamel([%re "/(textAnchor)=\"(start|middle|end)\"/g"])
-  ->toPolyCamel(
-      [%re
-        "/(textDecoration)=\"(|none|underline|overline|line-through|blink )\"/g"
+        "/\\b(fontWeight)=\"(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)\"/g"
       ],
     )
   ->toPolyCamel(
+      [%re "/\\b(gradientUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
+    )
+  ->toPolyCamel([%re "/\\b(lengthAdjust)=\"(spacing|spacingAndGlyphs)\"/g"])
+  ->toPolyCamel([%re "/\\b(markerUnits)=\"(userSpaceOnUse|strokeWidth)\"/g"])
+  ->toPolyCamel(
+      [%re "/\\b(maskContentUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
+    )
+  ->toPolyCamel(
+      [%re "/\\b(maskUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
+    )
+  ->toPolyCamel([%re "/\\b(method)=\"(align|stretch)\"/g"])
+  ->toPolyCamel([%re "/\\b(midLine)=\"(sharp|smooth)\"/g"])
+  ->toPolyCamel(
       [%re
-        "/(vectorEffect)=\"(none|default|non-scaling-stroke|inherit|uri)\"/g"
+        "/\\b(patternContentUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"
+      ],
+    )
+  ->toPolyCamel(
+      [%re "/\\b(patternUnits)=\"(userSpaceOnUse|objectBoundingBox)\"/g"],
+    )
+  ->toPolyCamel([%re "/\\b(spacing)=\"(auto|exact)\"/g"])
+  ->toPolyCamel([%re "/\\b(strokeLinecap)=\"(butt|square|round)\"/g"])
+  ->toPolyCamel([%re "/\\b(strokeLinejoin)=\"(miter|bevel|round)\"/g"])
+  ->toPolyCamel([%re "/\\b(textAnchor)=\"(start|middle|end)\"/g"])
+  ->toPolyCamel(
+      [%re
+        "/\\b(textDecoration)=\"(|none|underline|overline|line-through|blink )\"/g"
+      ],
+    )
+  ->toPolyCamel(
+      [%re
+        "/\\b(vectorEffect)=\"(none|default|non-scaling-stroke|inherit|uri)\"/g"
       ],
     );
 
@@ -138,7 +142,7 @@ let undefinedString: string = Js.undefined->Obj.magic;
 let transformReasonNativeSizeProps = svg =>
   svg->unsafeReplaceBy4(
     [%re
-      "/(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|offset|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"([0-9]+)(\\.[0-9]+)?(%)?\"/g"
+      "/\\b(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|offset|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"([0-9]+)(\\.[0-9]+)?(%)?\"/g"
     ],
     (_matchPart, p1, p2, p3, p4, _offset, _wholeString) => {
     p1
