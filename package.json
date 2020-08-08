@@ -59,8 +59,7 @@
     "webpack-cli": "^3.3.0"
   },
   "prettier": {
-    "trailingComma": "all",
-    "proseWrap": "always"
+    "trailingComma": "all"
   },
   "lint-staged": {
     "*.{md,json,js,css}": [
