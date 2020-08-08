@@ -55,20 +55,20 @@ SVG components:
 
 ### `--with-web`
 
-Need you to install have:
+Need you to have:
 
 - [React](https://reactjs.org)
 
 ### `--with-web-for-reason`
 
-Need you to install have:
+Need you to have:
 
 - [React](https://reactjs.org)
 - [`reason-react`](https://reasonml.github.io/reason-react/)
 
 ### `--with-native`
 
-Need you to install have:
+Need you to have:
 
 - [React](https://reactjs.org)
 - [React Native](https://reactnative.dev) (or an alternative platform like
@@ -77,9 +77,10 @@ Need you to install have:
 
 ### `--with-native-for-reason`
 
-In addition to `--with-native` requirements, you need to install & add as
-`bs-dependencies` in your `bsconfig.json`:
+In addition to `--with-native` requirements, you need to have:
 
 - [`reason-react`](https://reasonml.github.io/reason-react/)
 - [`reason-react-native`](https://reason-react-native.github.io)
 - [`@reason-react-native/svg`](https://github.com/reason-react-native/svg)
+
+Ensure as that this dependencies are in the `bs-dependencies` of your `bsconfig.json`.
