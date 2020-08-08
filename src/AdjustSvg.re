@@ -138,7 +138,7 @@ let undefinedString: string = Js.undefined->Obj.magic;
 let transformReasonNativeSizeProps = svg =>
   svg->unsafeReplaceBy4(
     [%re
-      "/(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"([0-9]+)(\\.[0-9]+)?(%)?\"/g"
+      "/(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|offset|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"([0-9]+)(\\.[0-9]+)?(%)?\"/g"
     ],
     (_matchPart, p1, p2, p3, p4, _offset, _wholeString) => {
     p1
