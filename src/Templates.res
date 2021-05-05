@@ -74,7 +74,7 @@ let native = (svgOutput: string, ~commonjs) =>
   (sep ++
   (importReactNativeSvg(commonjs) ++ (sep ++ (\"export"(svgOutput, commonjs) ++ sep))))
 
-let nativeForReScript = (svgOutput: string) => {
+let nativeForRescript = (svgOutput: string) => {
   let output = {
     open AdjustSvg
     svgOutput->transformReScriptNativeProps->transformReScriptNativeSizeProps
@@ -93,7 +93,7 @@ let make =
 `
 }
 
-let webForReScript = (svgOutput: string) =>
+let webForRescript = (svgOutput: string) =>
   j`@react.component
 let make =
     (

@@ -47,8 +47,8 @@ let transformFiles = (
   files,
   ~withNative,
   ~withWeb,
-  ~withNativeForReScript,
-  ~withWebForReScript,
+  ~withNativeForRescript,
+  ~withWebForRescript,
   ~removeFill,
   ~removeStroke,
   ~commonjs,
@@ -59,10 +59,10 @@ let transformFiles = (
       trsf(~js=true, ~pascalCaseTag=true, ~template=Templates.native(~commonjs))
     let trsfWeb = () => trsf(~js=true, ~pascalCaseTag=false, ~template=Templates.web(~commonjs))
     let trsfNativeForR = () =>
-      trsf(~js=false, ~pascalCaseTag=true, ~template=Templates.nativeForReScript)
+      trsf(~js=false, ~pascalCaseTag=true, ~template=Templates.nativeForRescript)
     let trsfWebForR = () =>
-      trsf(~js=false, ~pascalCaseTag=false, ~template=Templates.webForReScript)
-    switch (withNative, withWeb, withNativeForReScript, withWebForReScript) {
+      trsf(~js=false, ~pascalCaseTag=false, ~template=Templates.webForRescript)
+    switch (withNative, withWeb, withNativeForRescript, withWebForRescript) {
     | (false, false, false, false) => files
     | (true, false, false, false) =>
       files->Array.concat([{name: file.name ++ ".js", content: trsfNative()}])
@@ -128,8 +128,8 @@ let write = (outputPath, files) => {
 type flags = {
   withNative: Js.Undefined.t<bool>,
   withWeb: Js.Undefined.t<bool>,
-  withNativeForReScript: Js.Undefined.t<bool>,
-  withWebForReScript: Js.Undefined.t<bool>,
+  withNativeForRescript: Js.Undefined.t<bool>,
+  withWebForRescript: Js.Undefined.t<bool>,
   removeFill: Js.Undefined.t<bool>,
   removeStroke: Js.Undefined.t<bool>,
   commonjs: Js.Undefined.t<bool>,
@@ -146,10 +146,10 @@ let make = ((sourcePath, outputPath), flags) => {
       files->transformFiles(
         ~withNative=flags.withNative->Js.Undefined.toOption->Option.getWithDefault(false),
         ~withWeb=flags.withWeb->Js.Undefined.toOption->Option.getWithDefault(false),
-        ~withNativeForReScript=flags.withNativeForReScript
+        ~withNativeForRescript=flags.withNativeForRescript
         ->Js.Undefined.toOption
         ->Option.getWithDefault(false),
-        ~withWebForReScript=flags.withWebForReScript
+        ~withWebForRescript=flags.withWebForRescript
         ->Js.Undefined.toOption
         ->Option.getWithDefault(false),
         ~removeFill=flags.removeFill->Js.Undefined.toOption->Option.getWithDefault(false),

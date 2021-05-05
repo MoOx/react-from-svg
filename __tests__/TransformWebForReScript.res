@@ -12,7 +12,7 @@ let snap = (svg, ~removeFill, ~removeStroke) =>
     ~removeStroke,
     ~js=false,
     ~pascalCaseTag=false,
-    ~template=Templates.webForReScript,
+    ~template=Templates.webForRescript,
   )
   ->expect
   ->toMatchSnapshot
