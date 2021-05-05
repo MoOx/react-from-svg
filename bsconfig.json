@@ -1,10 +1,7 @@
 {
   "name": "react-from-svg",
   "namespace": true,
-  "refmt": 3,
-  "reason": {
-    "react-jsx": 3
-  },
+  "reason": { "react-jsx": 3 },
   "package-specs": {
     "module": "commonjs",
     "in-source": true
@@ -20,6 +17,6 @@
       "type": "dev"
     }
   ],
-  "bs-dependencies": ["reason-future"],
+  "bs-dependencies": ["rescript-future"],
   "bs-dev-dependencies": ["@glennsl/bs-jest"]
 }

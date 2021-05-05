@@ -1,22 +1,19 @@
 {
   "name": "react-from-svg",
-  "description": "Transform SVG files into React components, Native and/or Web, JavaScript and ReasonML. Without shitload of dependencies.",
+  "description": "Transform SVG files into React components, Native and/or Web, JavaScript and ReScript. Without shitload of dependencies.",
   "version": "4.0.6",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "keywords": [
-    "react",
-    "react-native",
-    "reason-react",
-    "bs-react",
-    "svg",
     "react-native-svg",
     "react-native-web",
-    "bucklescript",
     "react-native",
+    "react",
+    "rescript",
     "svg-to-react",
-    "svgr",
-    "svgr-cli"
+    "svg",
+    "svgr-cli",
+    "svgr"
   ],
   "bin": {
     "react-from-svg": "./bin.js"
@@ -26,14 +23,14 @@
     "bin.js"
   ],
   "scripts": {
-    "re:clean": "bsb -clean-world",
-    "re:build": "bsb -make-world",
+    "res:clean": "rescript clean",
+    "res:build": "rescript build",
     "tests:jest": "jest",
-    "tests:reason": "./bin.js __tests__/__fixtures__ __tests__/__fixtures__/components --with-native-for-reason",
-    "posttests:reason": "find __tests__/__fixtures__/components -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
-    "tests": "yarn tests:jest && yarn tests:reason",
+    "tests:rescript": "./bin.js __tests__/__fixtures__ __tests__/__fixtures__/components --with-native-for-rescript",
+    "posttests:rescript": "rescript convert -all",
+    "tests": "yarn tests:jest && yarn tests:rescript",
     "test": "yarn prerelease && yarn tests",
-    "prerelease": "yarn re:clean && yarn re:build && webpack",
+    "prerelease": "yarn res:clean && yarn res:build && webpack",
     "release": "npmpub"
   },
   "dependencies": {
@@ -44,13 +41,13 @@
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.5.0",
-    "bs-platform": "^7.3.0",
-    "husky": "^4.0.0",
     "jest": "^25.0.0",
     "lint-staged": "^10.0.0",
     "npmpub": "^5.0.0",
     "prettier": "^2.0.0",
-    "reason-future": "^2.4.0",
+    "rescript": "^9.1.0",
+    "rescript-future": "^1.1.0",
+    "simple-git-hooks": "^2.2.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.0"
   },
@@ -58,17 +55,11 @@
     "trailingComma": "all"
   },
   "lint-staged": {
-    "*.{md,json,js,css}": [
-      "prettier --write"
-    ],
-    "*.{re,rei}": [
-      "bsrefmt --in-place"
-    ]
+    "*.{md,json,js,css}": "prettier --write",
+    "*.{res,resi}": "rescript format"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "lint-staged"
   },
   "jest": {
     "testPathIgnorePatterns": [
