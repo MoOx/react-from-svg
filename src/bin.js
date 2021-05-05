@@ -34,8 +34,8 @@ const cli = meow(
 if (
   cli.flags.withNative === undefined &&
   cli.flags.withWeb === undefined &&
-  cli.flags.withNativeForReason === undefined &&
-  cli.flags.withWebForReason === undefined
+  cli.flags.withNativeForReScript === undefined &&
+  cli.flags.withWebForReScript === undefined
 ) {
   console.error(
     "You should at least choose an output option (one of --with-*)!",
