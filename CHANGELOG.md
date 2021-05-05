@@ -1,5 +1,22 @@
 # Changelog of `react-from-svg`
 
+## 5.0.0 - 2021-05-04
+
+### Breaking change for all users
+
+Some alias have been replaced. Please check the README for more information.
+
+### Breaking change for user of `--with-**-reason` options
+
+ReasonML output has been replaced by ReScript. This means:
+
+- `--with-native-for-reason` has been replaced by `--with-native-for-rescript`
+- `--with-web-for-reason` has been replaced by `--with-web-for-rescript`
+
+Output is now ReScript code that works with `@rescript/react`, `rescript-react-native` and `@rescript-react-native/svg`.
+
+See <https://rescript-react-native.github.io/blog/2021-05-04-hello-rescript-react-native> for more informations.
+
 ## 4.0.6 - 2020-08-08
 
 - `--with-native-for-reason`: Fixed unwanted props transformation (eg: opacity) [b69604f](https://github.com/MoOx/react-from-svg/commit/b69604f) by [@MoOx](https://github.com/MoOx)
