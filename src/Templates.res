@@ -79,27 +79,25 @@ let nativeForRescript = (svgOutput: string) => {
     open AdjustSvg
     svgOutput->transformReScriptNativeProps->transformReScriptNativeSizeProps
   }
-  j`open ReactNative;
-open ReactNativeSvg;
+  j`open ReactNative
+open ReactNativeSvg
 
 @react.component
-let make =
-    (
-      ~width: option<Style.size>=?,
-      ~height: option<Style.size>=?,
-      ~fill: option<string>=?,
-      ~stroke: option<string>=?,
-    ) => $output;
+let make = (
+  ~width: option<Style.size>=?,
+  ~height: option<Style.size>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+) =>$output;
 `
 }
 
 let webForRescript = (svgOutput: string) =>
   j`@react.component
-let make =
-    (
-      ~width: option<string>=?,
-      ~height: option<string>=?,
-      ~fill: option<string>=?,
-      ~stroke: option<string>=?,
-    ) => $svgOutput;
+let make = (
+  ~width: option<string>=?,
+  ~height: option<string>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+) => $svgOutput;
 `
