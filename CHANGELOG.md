@@ -1,5 +1,10 @@
 # Changelog of `react-from-svg`
 
+## 5.0.2 - 2021-05-05
+
+- Fix \*-rescript options, round 2
+- Adjust a bit rescript output
+
 ## 5.0.1 - 2021-05-05
 
 Fix \*-rescript options
