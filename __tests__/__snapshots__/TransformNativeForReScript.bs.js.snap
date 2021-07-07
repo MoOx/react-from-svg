@@ -101,6 +101,34 @@ let make = (
 "
 `;
 
+exports[`reason native svg tweaks % negative 1`] = `
+"open ReactNative
+open ReactNativeSvg
+
+@react.component
+let make = (
+  ~width: option<Style.size>=?,
+  ~height: option<Style.size>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+) =><Svg ?width ?height ?fill ?stroke> <Circle cx={-2.->Style.pct} /> </Svg>;
+"
+`;
+
+exports[`reason native svg tweaks % negative with decimals 1`] = `
+"open ReactNative
+open ReactNativeSvg
+
+@react.component
+let make = (
+  ~width: option<Style.size>=?,
+  ~height: option<Style.size>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+) =><Svg ?width ?height ?fill ?stroke> <Circle cx={-2.001->Style.pct} /> </Svg>;
+"
+`;
+
 exports[`reason native svg tweaks % with decimals 1`] = `
 "open ReactNative
 open ReactNativeSvg

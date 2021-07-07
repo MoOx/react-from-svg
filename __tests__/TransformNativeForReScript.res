@@ -44,6 +44,14 @@ describe("reason native svg tweaks", () => {
     j`<svg><circle cx="2.45%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
   )
 
+  test("% negative", () =>
+    j`<svg><circle cx="-2%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
+  )
+
+  test("% negative with decimals", () =>
+    j`<svg><circle cx="-2.001%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
+  )
+
   test("float", () => j`<svg><circle cx="2" /></svg>`->snap(~removeFill=true, ~removeStroke=true))
   test("float with decimals", () =>
     j`<svg><circle cx="12.96" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
