@@ -1,7 +1,15 @@
 # React from SVG
 
-[![Build Status](https://github.com/MoOx/react-from-svg/workflows/Build/badge.svg)](https://github.com/MoOx/react-from-svg/actions)
-[![Version](https://img.shields.io/npm/v/react-from-svg.svg)](https://www.npmjs.com/react-from-svg)
+<a href="https://github.com/MoOx/react-from-svg?sponsor=1">
+  <img width="140" align="right" alt="Sponsoring button" src="https://github.com/moox/.github/raw/main/FUNDING.svg">
+</a>
+
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/MoOx/react-from-svg) ![npm downloads](https://img.shields.io/npm/dm/react-from-svg)](https://www.npmjs.com/package/react-from-svg)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/MoOx/react-from-svg/Build)](https://github.com/MoOx/react-from-svg/actions)
+[![License](https://img.shields.io/github/license/MoOx/react-from-svg)](https://github.com/MoOx/react-from-svg)  
+[![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=Follow%20me)](https://github.com/MoOx)
+[![Twitter Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://twitter.com/MoOx)
+[![Sponsor my work](https://github.com/moox/.github/raw/main/FUNDING-button.svg)](https://github.com/MoOx/react-from-svg?sponsor=1)
 
 > Transform SVG files into React components, Native and/or Web, JavaScript and
 > rescriptML. Without shitload of dependencies.
