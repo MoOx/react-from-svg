@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 5.0.3 - 2021-07-07
+
+- Fix negative number transformation for ReScript output.
+
 ## 5.0.2 - 2021-05-05
 
 - Fix \*-rescript options, round 2
