@@ -5,10 +5,10 @@ let importReact = commonjs =>
   commonjs ? "const React = require('react')" : "import React from 'react'"
 let \"export" = (svgOutput, commonjs) =>
   commonjs
-    ? j`module.exports = ({width, height, fill, stroke}) => {
+    ? j`module.exports = ({width, height, fill, stroke, style}) => {
   return ($svgOutput);
 }`
-    : j`export default ({width, height, fill, stroke}) => {
+    : j`export default ({width, height, fill, stroke, style}) => {
   return ($svgOutput);
 }`
 
@@ -88,6 +88,7 @@ let make = (
   ~height: option<Style.size>=?,
   ~fill: option<string>=?,
   ~stroke: option<string>=?,
+  ~style: option<Style.t>=?,
 ) =>$output;
 `
 }
@@ -99,5 +100,6 @@ let make = (
   ~height: option<string>=?,
   ~fill: option<string>=?,
   ~stroke: option<string>=?,
+  ~style: option<Style.t>=?,
 ) => $svgOutput;
 `
