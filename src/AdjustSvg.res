@@ -18,9 +18,13 @@ let prepareSvgProps = svg =>
   ->Js.String2.replaceByRe(%re("/<svg\\s?([^>]*)?\\sfill=\"[^\\\"]*\"/g"), j`<svg \\$1`)
 
 let injectSvgJsProps = svg =>
-  svg->Js.String2.replace(">", " width={width} height={height} fill={fill} stroke={stroke}>")
+  svg->Js.String2.replace(
+    ">",
+    " width={width} height={height} fill={fill} stroke={stroke} style={style}>",
+  )
 
-let injectSvgReScriptProps = svg => svg->Js.String2.replace(">", " ?width ?height ?fill ?stroke>")
+let injectSvgReScriptProps = svg =>
+  svg->Js.String2.replace(">", " ?width ?height ?fill ?stroke ?style>")
 
 let dashToCamelCaseProps = svg =>
   svg->Js.String2.unsafeReplaceBy1(%re("/\\s([a-z-]+)/g"), (
