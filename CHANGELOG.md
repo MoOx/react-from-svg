@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 5.1.1 - 2021-08-18
+
+- Fix published files
+
 ## 5.1.0 - 2021-08-18
 
 - Add support for style prop
