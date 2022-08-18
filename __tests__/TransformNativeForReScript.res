@@ -49,4 +49,7 @@ describe("rescript native svg tweaks", () => {
   test("float", () => j`<svg><circle cx="2" /></svg>`->snap)
   test("float with decimals", () => j`<svg><circle cx="12.96" /></svg>`->snap)
   test("float with only decimals", () => j`<svg><stop offset=".9" /></svg>`->snap)
+  test("matrix", () =>
+    j`<svg><radialGradient gradientTransform="matrix(.38431685 -.92316433 .92320126 .38430148 -.987558 .951797)" /><radialGradient gradientTransform="matrix(0 1 0.1 1.0 -1 -.1)" /></svg>`->snap
+  )
 })

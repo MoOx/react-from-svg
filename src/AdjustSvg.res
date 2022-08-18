@@ -96,6 +96,12 @@ let transformReScriptNativeProps = svg =>
 type t = string
 @send
 external unsafeReplaceBy4: (t, Js_re.t, @uncurry (t, t, t, t, t, int, t) => t) => t = "replace"
+@send
+external unsafeReplaceBy12: (
+  t,
+  Js_re.t,
+  @uncurry (t, t, t, t, t, t, t, t, t, t, t, t, t, int, t) => t,
+) => t = "replace"
 
 let undefinedString: string = Js.undefined->Obj.magic
 
@@ -107,7 +113,30 @@ let transformReScriptNativeSizeProps = svg =>
     (_matchPart, attributeName, digits, decimals, unit, _offset, _wholeString) =>
       attributeName ++
       ("={" ++
-      ((digits === "" ? "0" : digits) ++
+      (digits ++
       ((decimals !== undefinedString ? decimals : ".") ++
       ("->Style." ++ ((unit === "%" ? "pct" : "dp") ++ "}"))))),
   )
+
+let transformReScriptNativeMatrixProps = svg =>
+  svg->unsafeReplaceBy12(
+    %re(
+      "/\\bgradientTransform=\"matrix\\((-?[0-9]*(\\.[0-9]+)?\\s+)(-?[0-9]*(\\.[0-9]+)?\\s+)(-?[0-9]*(\\.[0-9]+)?\\s+)(-?[0-9]*(\\.[0-9]+)?\\s+)(-?[0-9]*(\\.[0-9]+)?\\s+)(-?[0-9]*(\\.[0-9]+)?)\)\"/g"
+    ),
+    (_matchPart, _1, _, _2, _, _3, _, _4, _, _5, _, _6, _, _offset, _wholeString) =>
+      "gradientTransform" ++
+      "=(" ++
+      _1 ++
+      "," ++
+      _2 ++
+      "," ++
+      _3 ++
+      "," ++
+      _4 ++
+      "," ++
+      _5 ++
+      "," ++
+      _6 ++ ")",
+  )
+let transformReScriptNativeFixupDigits = svg =>
+  svg->Js.String2.replaceByRe(%re("/([{(,]-?)\\./g"), "$10.")

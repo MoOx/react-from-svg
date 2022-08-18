@@ -198,6 +198,21 @@ let make = (
 "
 `;
 
+exports[`rescript native svg tweaks matrix 1`] = `
+"open ReactNative
+open ReactNativeSvg
+
+@react.component
+let make = (
+  ~width: option<Style.size>=?,
+  ~height: option<Style.size>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+  ~style: option<Style.t>=?,
+) =><Svg ?width ?height ?fill ?stroke ?style> <RadialGradient gradientTransform=(0.38431685 ,-0.92316433 ,0.92320126 ,0.38430148 ,-0.987558 ,0.951797) /> <RadialGradient gradientTransform=(0 ,1 ,0.1 ,1.0 ,-1 ,-0.1) /> </Svg>;
+"
+`;
+
 exports[`simple svg all options 1`] = `
 "open ReactNative
 open ReactNativeSvg

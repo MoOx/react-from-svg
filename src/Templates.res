@@ -77,7 +77,11 @@ let native = (svgOutput: string, ~commonjs) =>
 let nativeForRescript = (svgOutput: string) => {
   let output = {
     open AdjustSvg
-    svgOutput->transformReScriptNativeProps->transformReScriptNativeSizeProps
+    svgOutput
+    ->transformReScriptNativeProps
+    ->transformReScriptNativeSizeProps
+    ->transformReScriptNativeMatrixProps
+    ->transformReScriptNativeFixupDigits
   }
   j`open ReactNative
 open ReactNativeSvg
