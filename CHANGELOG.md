@@ -1,5 +1,10 @@
 # Changelog of `react-from-svg`
 
+## 5.1.3 - 2022-08-18
+
+- Handle `gradientTransform` for ReScript
+- Handle float without leading 0 for ReScript
+
 ## 5.1.2 - 2021-08-18
 
 - Fix style prop generation
