@@ -93,7 +93,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks % 1`] = `
+exports[`rescript native svg tweaks % 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -108,7 +108,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks % negative 1`] = `
+exports[`rescript native svg tweaks % negative 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -123,7 +123,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks % negative with decimals 1`] = `
+exports[`rescript native svg tweaks % negative with decimals 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -138,7 +138,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks % with decimals 1`] = `
+exports[`rescript native svg tweaks % with decimals 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -153,7 +153,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks float 1`] = `
+exports[`rescript native svg tweaks float 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -168,7 +168,7 @@ let make = (
 "
 `;
 
-exports[`reason native svg tweaks float with decimals 1`] = `
+exports[`rescript native svg tweaks float with decimals 1`] = `
 "open ReactNative
 open ReactNativeSvg
 
@@ -180,6 +180,21 @@ let make = (
   ~stroke: option<string>=?,
   ~style: option<Style.t>=?,
 ) =><Svg ?width ?height ?fill ?stroke ?style> <Circle cx={12.96->Style.dp} /> </Svg>;
+"
+`;
+
+exports[`rescript native svg tweaks float with only decimals 1`] = `
+"open ReactNative
+open ReactNativeSvg
+
+@react.component
+let make = (
+  ~width: option<Style.size>=?,
+  ~height: option<Style.size>=?,
+  ~fill: option<string>=?,
+  ~stroke: option<string>=?,
+  ~style: option<Style.t>=?,
+) =><Svg ?width ?height ?fill ?stroke ?style> <Stop offset={0.9->Style.dp} /> </Svg>;
 "
 `;
 

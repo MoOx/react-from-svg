@@ -5,7 +5,7 @@ open Expect
 
 let fixtures = "./__tests__/__fixtures__"
 
-let snap = (svg, ~removeFill, ~removeStroke) =>
+let snap = (~removeFill=false, ~removeStroke=false, svg) =>
   svg
   ->Transformer.transformSvg(
     ~removeFill,
@@ -37,23 +37,16 @@ describe("with fill", () => readFileSync(fixtures ++ "/with-fill.svg", #utf8)->t
 
 describe("with stroke", () => readFileSync(fixtures ++ "/with-stroke.svg", #utf8)->testAll)
 
-describe("reason native svg tweaks", () => {
-  test("%", () => j`<svg><circle cx="2%" /></svg>`->snap(~removeFill=true, ~removeStroke=true))
+describe("rescript native svg tweaks", () => {
+  test("%", () => j`<svg><circle cx="2%" /></svg>`->snap)
 
-  test("% with decimals", () =>
-    j`<svg><circle cx="2.45%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
-  )
+  test("% with decimals", () => j`<svg><circle cx="2.45%" /></svg>`->snap)
 
-  test("% negative", () =>
-    j`<svg><circle cx="-2%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
-  )
+  test("% negative", () => j`<svg><circle cx="-2%" /></svg>`->snap)
 
-  test("% negative with decimals", () =>
-    j`<svg><circle cx="-2.001%" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
-  )
+  test("% negative with decimals", () => j`<svg><circle cx="-2.001%" /></svg>`->snap)
 
-  test("float", () => j`<svg><circle cx="2" /></svg>`->snap(~removeFill=true, ~removeStroke=true))
-  test("float with decimals", () =>
-    j`<svg><circle cx="12.96" /></svg>`->snap(~removeFill=true, ~removeStroke=true)
-  )
+  test("float", () => j`<svg><circle cx="2" /></svg>`->snap)
+  test("float with decimals", () => j`<svg><circle cx="12.96" /></svg>`->snap)
+  test("float with only decimals", () => j`<svg><stop offset=".9" /></svg>`->snap)
 })

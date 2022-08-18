@@ -102,12 +102,12 @@ let undefinedString: string = Js.undefined->Obj.magic
 let transformReScriptNativeSizeProps = svg =>
   svg->unsafeReplaceBy4(
     %re(
-      "/\\b(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|offset|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"(-?[0-9]+)(\\.[0-9]+)?(%)?\"/g"
+      "/\\b(cx|cy|dx|dy|fontSize|fx|fy|height|inlineSize|kerning|letterSpacing|markerHeight|markerWidth|offset|originX|originY|r|refX|refY|rotate|rotation|rx|ry|scale|startOffset|strokeDashoffset|strokeMiterlimit|strokeWidth|verticalAlign|width|wordSpacing|x|x1|x2|y|y1|y2)=\"(-?[0-9]*)(\\.[0-9]+)?(%)?\"/g"
     ),
-    (_matchPart, p1, p2, p3, p4, _offset, _wholeString) =>
-      p1 ++
+    (_matchPart, attributeName, digits, decimals, unit, _offset, _wholeString) =>
+      attributeName ++
       ("={" ++
-      (p2 ++
-      ((p3 !== undefinedString ? p3 : ".") ++
-      ("->Style." ++ ((p4 === "%" ? "pct" : "dp") ++ "}"))))),
+      ((digits === "" ? "0" : digits) ++
+      ((decimals !== undefinedString ? decimals : ".") ++
+      ("->Style." ++ ((unit === "%" ? "pct" : "dp") ++ "}"))))),
   )
