@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 6.0.0 - 2023-01-17
+
+- Add `--with-native-for-typescript` option for `react-native-svg` with TypeScript
+
 ## 5.1.3 - 2022-08-18
 
 - Handle `gradientTransform` for ReScript

@@ -34,6 +34,8 @@ Usage
 
 Options
   --with-native, -rn                    Output code for react-native-svg
+  --with-native-for-typescript, -rnts   Output code for react-native-svg with TypeScript
+
   --with-web, -rnw                      Output code for DOM. If --with-native is also used, will be output as .web.js files
   --with-native-for-rescript, -rrn      Output code for @rescript-react-native/svg
   --with-web-for-rescript, -rrnw        Output code for @rescript/react
