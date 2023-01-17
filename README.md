@@ -5,7 +5,7 @@
 </a>
 
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/MoOx/react-from-svg) ![npm downloads](https://img.shields.io/npm/dm/react-from-svg)](https://www.npmjs.com/package/react-from-svg)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/MoOx/react-from-svg/Build)](https://github.com/MoOx/react-from-svg/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MoOx/react-from-svg/build.yml?branch=main)](https://github.com/MoOx/react-from-svg/actions)
 [![License](https://img.shields.io/github/license/MoOx/react-from-svg)](https://github.com/MoOx/react-from-svg)  
 [![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=Follow%20me)](https://github.com/MoOx)
 [![Twitter Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://twitter.com/MoOx)
