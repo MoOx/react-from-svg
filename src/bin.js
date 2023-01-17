@@ -8,6 +8,7 @@ const cli = meow(
 
   Options
     --with-native, -rn                    Output code for react-native-svg
+    --with-native-for-typescript, -rnts   Output code for react-native-svg with TypeScript
     --with-web, -rnw                      Output code for DOM. If --with-native is also used, will be output as .web.js files
     --with-native-for-rescript, -rrn      Output code for @rescript-react-native/svg
     --with-web-for-rescript, -rrnw        Output code for @rescript/react
@@ -21,6 +22,7 @@ const cli = meow(
   {
     flags: {
       "with-native": { type: "boolean", alias: "rn" },
+      "with-native-for-typescript": { type: "boolean", alias: "rnts" },
       "with-web": { type: "boolean", alias: "rnw" },
       "with-native-for-rescript": { type: "boolean", alias: "rrn" },
       "with-web-for-rescript": { type: "boolean", alias: "rrnw" },
@@ -33,6 +35,7 @@ const cli = meow(
 
 if (
   cli.flags.withNative === undefined &&
+  cli.flags.withNativeForTypescript === undefined &&
   cli.flags.withWeb === undefined &&
   cli.flags.withNativeForRescript === undefined &&
   cli.flags.withWebForRescript === undefined

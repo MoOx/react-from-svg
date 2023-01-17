@@ -11,8 +11,8 @@ let snap = (svg, ~name, ~removeFill, ~removeStroke) =>
     ~removeFill,
     ~removeStroke,
     ~js=true,
-    ~pascalCaseTag=false,
-    ~template=Templates.web(~commonjs=false, ~name),
+    ~pascalCaseTag=true,
+    ~template=Templates.nativeForTypescript(~commonjs=false, ~name),
   )
   ->expect
   ->toMatchSnapshot

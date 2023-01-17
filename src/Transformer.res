@@ -43,9 +43,12 @@ let transformSvg = (svg, ~removeFill, ~removeStroke, ~pascalCaseTag, ~js, ~templ
   ->template
 }
 
+let makeName = name => "SVG" ++ name
+
 let transformFiles = (
   files,
   ~withNative,
+  ~withNativeForTypescript: bool,
   ~withWeb,
   ~withNativeForRescript,
   ~withWebForRescript,
@@ -54,62 +57,138 @@ let transformFiles = (
   ~commonjs,
 ) =>
   files->Array.reduce([], (files, file) => {
+    let name = makeName(file.name)
     let trsf = file.content->transformSvg(~removeFill, ~removeStroke)
     let trsfNative = () =>
-      trsf(~js=true, ~pascalCaseTag=true, ~template=Templates.native(~commonjs))
-    let trsfWeb = () => trsf(~js=true, ~pascalCaseTag=false, ~template=Templates.web(~commonjs))
+      trsf(~js=true, ~pascalCaseTag=true, ~template=Templates.native(~commonjs, ~name))
+    let trsfNativeForTs = () =>
+      trsf(~js=true, ~pascalCaseTag=true, ~template=Templates.nativeForTypescript(~commonjs, ~name))
+    let trsfWeb = () =>
+      trsf(~js=true, ~pascalCaseTag=false, ~template=Templates.web(~commonjs, ~name))
     let trsfNativeForR = () =>
       trsf(~js=false, ~pascalCaseTag=true, ~template=Templates.nativeForRescript)
     let trsfWebForR = () =>
       trsf(~js=false, ~pascalCaseTag=false, ~template=Templates.webForRescript)
-    switch (withNative, withWeb, withNativeForRescript, withWebForRescript) {
-    | (false, false, false, false) => files
-    | (true, false, false, false) =>
+    switch (
+      withNative,
+      withNativeForTypescript,
+      withWeb,
+      withNativeForRescript,
+      withWebForRescript,
+    ) {
+    | (false, false, false, false, false) => files
+    | (true, false, false, false, false) =>
       files->Array.concat([{name: file.name ++ ".js", content: trsfNative()}])
-    | (false, true, false, false) =>
+    | (true, true, false, false, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+      ])
+    | (false, false, true, false, false) =>
       files->Array.concat([{name: file.name ++ ".js", content: trsfWeb()}])
-    | (true, true, false, false) =>
+    | (false, true, false, false, false) =>
+      files->Array.concat([{name: file.name ++ ".tsx", content: trsfNativeForTs()}])
+    | (false, true, true, false, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfWeb()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+      ])
+    | (true, false, true, false, false) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfNative()},
         {name: file.name ++ ".web.js", content: trsfWeb()},
       ])
-    | (false, false, true, false) =>
+    | (true, true, true, false, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".web.js", content: trsfWeb()},
+      ])
+    | (false, false, false, true, false) =>
       files->Array.concat([{name: file.name ++ ".res", content: trsfNativeForR()}])
-    | (false, false, false, true) =>
+    | (false, true, false, true, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfNativeForR()},
+      ])
+    | (false, false, false, false, true) =>
       files->Array.concat([{name: file.name ++ ".res", content: trsfWebForR()}])
-    | (true, true, true, false) =>
+    | (false, true, false, false, true) =>
+      files->Array.concat([
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfWebForR()},
+      ])
+    | (true, false, true, true, false) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfNative()},
         {name: file.name ++ ".web.js", content: trsfWeb()},
         {name: file.name ++ ".res", content: trsfNativeForR()},
       ])
-    | (true, true, false, true) =>
+    | (true, true, true, true, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".web.js", content: trsfWeb()},
+        {name: file.name ++ ".res", content: trsfNativeForR()},
+      ])
+    | (true, false, true, false, true) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfNative()},
         {name: file.name ++ ".web.js", content: trsfWeb()},
         {name: file.name ++ ".res", content: trsfWebForR()},
       ])
-    | (true, false, true, false) =>
+    | (true, true, true, false, true) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".web.js", content: trsfWeb()},
+        {name: file.name ++ ".res", content: trsfWebForR()},
+      ])
+    | (true, false, false, true, false) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfNative()},
         {name: file.name ++ ".res", content: trsfNativeForR()},
       ])
-    | (true, false, false, true) =>
+    | (true, true, false, true, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfNativeForR()},
+      ])
+    | (true, false, false, false, true) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfNative()},
         {name: file.name ++ ".res", content: trsfWebForR()},
       ])
-    | (false, true, true, false) =>
+    | (true, true, false, false, true) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfNative()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfWebForR()},
+      ])
+    | (false, false, true, true, false) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfWeb()},
         {name: file.name ++ ".res", content: trsfNativeForR()},
       ])
-    | (false, true, false, true) =>
+    | (false, true, true, true, false) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfWeb()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfNativeForR()},
+      ])
+    | (false, false, true, false, true) =>
       files->Array.concat([
         {name: file.name ++ ".js", content: trsfWeb()},
         {name: file.name ++ ".res", content: trsfWebForR()},
       ])
-    | (_, _, true, true) =>
+    | (false, true, true, false, true) =>
+      files->Array.concat([
+        {name: file.name ++ ".js", content: trsfWeb()},
+        {name: file.name ++ ".tsx", content: trsfNativeForTs()},
+        {name: file.name ++ ".res", content: trsfWebForR()},
+      ])
+    | (_, _, _, true, true) =>
       failwith(
         "For now --with-native-for-rescript & --with-web-for-rescript cannot be used at the same time.",
       )
@@ -118,7 +197,7 @@ let transformFiles = (
 
 let write = (outputPath, files) => {
   files->Array.forEach(file => {
-    let filename = Path.join([outputPath, "SVG" ++ file.name])
+    let filename = Path.join([outputPath, makeName(file.name)])
     mkdirpSync(Path.dirname(filename))
     Fs.writeFileAsUtf8Sync(filename, file.content)
   })
@@ -127,6 +206,7 @@ let write = (outputPath, files) => {
 
 type flags = {
   withNative: Js.Undefined.t<bool>,
+  withNativeForTypescript: Js.Undefined.t<bool>,
   withWeb: Js.Undefined.t<bool>,
   withNativeForRescript: Js.Undefined.t<bool>,
   withWebForRescript: Js.Undefined.t<bool>,
@@ -145,6 +225,9 @@ let make = ((sourcePath, outputPath), flags) => {
     ->Future.map(files =>
       files->transformFiles(
         ~withNative=flags.withNative->Js.Undefined.toOption->Option.getWithDefault(false),
+        ~withNativeForTypescript=flags.withNativeForTypescript
+        ->Js.Undefined.toOption
+        ->Option.getWithDefault(false),
         ~withWeb=flags.withWeb->Js.Undefined.toOption->Option.getWithDefault(false),
         ~withNativeForRescript=flags.withNativeForRescript
         ->Js.Undefined.toOption

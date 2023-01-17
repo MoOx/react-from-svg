@@ -3,17 +3,29 @@ type svgOutput = string
 let sep = ";\n"
 let importReact = commonjs =>
   commonjs ? "const React = require('react')" : "import React from 'react'"
-let \"export" = (svgOutput, commonjs) =>
+let jsExport = (name, svgOutput, commonjs) =>
   commonjs
-    ? j`module.exports = ({width, height, fill, stroke, style}) => {
+    ? j`const $name = ({width, height, fill, stroke, style}) => {
   return ($svgOutput);
-}`
-    : j`export default ({width, height, fill, stroke, style}) => {
+};
+module.exports =$name`
+    : j`const $name = ({width, height, fill, stroke, style}) => {
   return ($svgOutput);
-}`
+};
+export default $name`
+let tsxExport = (name, svgOutput, commonjs) =>
+  commonjs
+    ? j`const $name = ({width, height, fill, stroke, style}: ReactFromSVGProps) => {
+  return ($svgOutput);
+};
+module.exports =$name`
+    : j`const $name = ({width, height, fill, stroke, style}: ReactFromSVGProps) => {
+  return ($svgOutput);
+};
+export default $name`
 
-let web = (svgOutput: string, ~commonjs) =>
-  importReact(commonjs) ++ (sep ++ (\"export"(svgOutput, commonjs) ++ sep))
+let web = (svgOutput: string, ~commonjs, ~name: string) =>
+  importReact(commonjs) ++ (sep ++ (jsExport(name, svgOutput, commonjs) ++ sep))
 
 let importReactNativeSvg = commonjs =>
   commonjs
@@ -69,10 +81,25 @@ let importReactNativeSvg = commonjs =>
   Use,
 } from 'react-native-svg'`
 
-let native = (svgOutput: string, ~commonjs) =>
+let native = (svgOutput: string, ~commonjs, ~name: string) =>
   importReact(commonjs) ++
   (sep ++
-  (importReactNativeSvg(commonjs) ++ (sep ++ (\"export"(svgOutput, commonjs) ++ sep))))
+  (importReactNativeSvg(commonjs) ++ (sep ++ (jsExport(name, svgOutput, commonjs) ++ sep))))
+
+let nativeForTypescript = (svgOutput: string, ~commonjs, ~name: string) =>
+  importReact(commonjs) ++
+  (sep ++
+  (importReactNativeSvg(commonjs) ++
+  j`
+type ReactFromSVGProps = {
+  width?: number;
+  height?: number;
+  fill?: string;
+  stroke?: string;
+  style?: any;
+};` ++
+  (sep ++
+  (tsxExport(name, svgOutput, commonjs) ++ sep))))
 
 let nativeForRescript = (svgOutput: string) => {
   let output = {
