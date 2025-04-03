@@ -116,3 +116,26 @@ for (let i = 0; i < allCombinations.length; i++) {
 }
 
 console.log("All combinations tested!");
+
+// Check if there are Git changes in the tests/components directory
+try {
+  console.log("Checking for Git changes in tests/components...");
+  const gitStatus = execSync(`git status --porcelain tests/components`, {
+    encoding: "utf-8",
+  });
+
+  if (gitStatus.trim()) {
+    console.error(
+      "❌ Error: Git changes detected in tests/components directory!",
+    );
+    console.error(gitStatus);
+    console.error("Please commit these changes or update the expected output.");
+    process.exit(1);
+  }
+
+  console.log("✅ No Git changes detected in tests/components.");
+} catch (error: unknown) {
+  console.error("❌ Error checking Git status:");
+  console.error(error);
+  process.exit(1);
+}
