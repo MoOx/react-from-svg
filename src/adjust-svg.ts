@@ -46,10 +46,6 @@ const deleteStroke = (svg: string): string => {
   return svg.replace(/ stroke="[^"]*"/g, "");
 };
 
-const toPolyCamel = (s: string, re: RegExp): string => {
-  return s.replace(re, (_, p1, p2) => p1 + ("=#" + toCamel(p2)));
-};
-
 export {
   cleanupStart,
   prepareSvgProps,

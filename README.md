@@ -12,8 +12,8 @@
 [![BlueSky Follow](https://img.shields.io/badge/Follow%20Me-on%20BlueSky-gray?style=social&logo=bluesky)](https://bsky.app/profile/moox.io)
 [![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://x.com/MoOx)
 
-> Transform SVG files into React components, Native and/or Web, JavaScript and
-> TypeScript. Without shitload of dependencies.
+> Transform SVG files into React components, Native and/or Web, JavaScript and/or TypeScript.
+> Without minimal dependencies.
 
 ## Install
 
