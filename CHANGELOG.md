@@ -1,5 +1,14 @@
 # Changelog of `react-from-svg`
 
+## 7.0.0 - 2025-04-03
+
+Rewritten in TypeScript.
+ReScript support as been removed (but feel free to add it back via a PR).
+
+- Remove `--commonjs` option
+- Remove `--with-*-for-rescript` options
+- Add `--with-web-for-typescript` option for DOM with TypeScript
+
 ## 6.0.0 - 2023-01-17
 
 - Add `--with-native-for-typescript` option for `react-native-svg` with TypeScript
