@@ -1,69 +1,56 @@
 {
   "name": "react-from-svg",
-  "description": "Transform SVG files into React components, Native and/or Web, JavaScript, TypeScript and ReScript. Without shitload of dependencies.",
   "version": "6.0.0",
+  "description": "Transform SVG files into React components, Native and/or Web, JavaScript and TypeScript. Without shitload of dependencies.",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
+  "type": "module",
+  "exports": "./dist/bin.js",
   "keywords": [
     "react-native-svg",
     "react-native-web",
     "react-native",
     "react",
-    "rescript",
     "svg-to-react",
     "svg",
     "svgr-cli",
     "svgr"
   ],
+  "engines": {
+    "node": "^22.0.0"
+  },
   "bin": {
-    "react-from-svg": "./bin.js"
+    "react-from-svg": "./dist/bin.js"
   },
   "files": [
     "dist",
-    "bin.js"
+    "!dist/**.test.js"
   ],
   "scripts": {
-    "res:clean": "rescript clean",
-    "res:build": "rescript build",
-    "tests:jest": "jest",
-    "tests:rescript": "./bin.js __tests__/__fixtures__ __tests__/__fixtures__/components --with-native-for-rescript",
-    "posttests:rescript": "rescript convert -all",
-    "tests": "yarn tests:jest && yarn tests:rescript",
-    "test": "yarn prerelease && yarn tests",
-    "prerelease": "yarn res:clean && yarn res:build && webpack",
+    "prepare": "husky",
+    "build": "tsc",
+    "format:generated": "prettier --write tests/components",
+    "test:build:all": "node dist/all-combinations.test.js",
+    "test": "npm run build && npm run test:build:all",
+    "prepublishOnly": "npm run build",
     "release": "npmpub"
   },
   "dependencies": {
-    "camelcase": "^6.0.0",
-    "glob": "^7.0.0",
-    "meow": "^6.0.0",
-    "mkdirp": "^0.5.0"
+    "camelcase": "^8.0.0",
+    "glob": "^11.0.1",
+    "meow": "^13.2.0",
+    "mkdirp": "^3.0.1"
   },
   "devDependencies": {
-    "@glennsl/bs-jest": "^0.5.0",
-    "jest": "^25.0.0",
-    "lint-staged": "^10.0.0",
+    "@types/react": "^19.1.0",
+    "husky": "^9.1.7",
     "npmpub": "^5.0.0",
-    "prettier": "^2.0.0",
-    "rescript": "^9.1.0",
-    "rescript-future": "^1.1.0",
-    "simple-git-hooks": "^2.2.0",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "prettier": "^3.5.3",
+    "react": "^19.1.0",
+    "react-native-svg": "^15.11.2",
+    "typescript": "^5.8.0"
   },
   "prettier": {
     "trailingComma": "all"
-  },
-  "lint-staged": {
-    "*.{md,json,js,css}": "prettier --write",
-    "*.{res,resi}": "rescript format"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "lint-staged"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/__fixtures__"
-    ]
   }
 }

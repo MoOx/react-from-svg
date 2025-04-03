@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react",
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "NodeNext"
+    }
+  },
+  "exclude": ["tests/**"]
+}
