@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 7.0.1 - 2025-04-04
+
+- Fixed: issue with dash to camel case transforming incorrectly negative number
+
 ## 7.0.0 - 2025-04-03
 
 Rewritten in TypeScript.
