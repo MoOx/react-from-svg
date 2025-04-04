@@ -24,7 +24,7 @@ const injectSvgJsProps = (svg: string): string => {
 };
 
 const dashToCamelCaseProps = (svg: string): string => {
-  return svg.replace(/\s([a-z-]+)/g, (_, p1) => " " + toCamel(p1));
+  return svg.replace(/\s([a-z][a-z-]+[a-z])/g, (_, p1) => " " + toCamel(p1));
 };
 
 const tagToPascalCase = (svg: string): string => {
