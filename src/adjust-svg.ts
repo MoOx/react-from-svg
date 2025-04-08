@@ -24,7 +24,12 @@ const injectSvgJsProps = (svg: string): string => {
 };
 
 const dashToCamelCaseProps = (svg: string): string => {
-  return svg.replace(/\s([a-z][a-z-]+[a-z])/g, (_, p1) => " " + toCamel(p1));
+  return svg.replace(/\s([a-z][a-z-]+[a-z])/g, (match, p1) => {
+    if (p1.startsWith("data-") || p1.startsWith("aria-")) {
+      return match;
+    }
+    return " " + toCamel(p1);
+  });
 };
 
 const tagToPascalCase = (svg: string): string => {
@@ -46,6 +51,21 @@ const deleteStroke = (svg: string): string => {
   return svg.replace(/ stroke="[^"]*"/g, "");
 };
 
+const transformStyleAttributes = (svg: string): string => {
+  return svg.replace(/ style="([^"]*)"/g, (_, styleContent) => {
+    const styleObject = styleContent
+      .split(";")
+      .filter(Boolean)
+      .map((style: string) => {
+        const [property, value] = style.split(":").map((s: string) => s.trim());
+        return `"${toCamel(property)}": "${value}"`;
+      })
+      .join(", ");
+
+    return ` style={{${styleObject}}}`;
+  });
+};
+
 export {
   cleanupStart,
   prepareSvgProps,
@@ -55,4 +75,5 @@ export {
   cleanupEndWithoutSpace,
   deleteFill,
   deleteStroke,
+  transformStyleAttributes,
 };

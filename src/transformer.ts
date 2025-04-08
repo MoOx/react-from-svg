@@ -12,6 +12,7 @@ import {
   cleanupEndWithoutSpace,
   deleteFill,
   deleteStroke,
+  transformStyleAttributes,
 } from "./adjust-svg.js";
 import {
   web,
@@ -74,6 +75,7 @@ export const transformSvg = (
   result = prepareSvgProps(result);
   result = injectSvgJsProps(result);
   result = dashToCamelCaseProps(result);
+  result = transformStyleAttributes(result);
   result = pascalCaseTag ? tagToPascalCase(result) : result;
   result = cleanupEndWithoutSpace(result);
   result = removeFill ? deleteFill(result) : result;
