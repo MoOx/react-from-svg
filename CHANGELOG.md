@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 7.1.1 - 2025-04-08
+
+- Fix title & desc removal if there are attributes
+
 ## 7.1.0 - 2025-04-08
 
 - Add transform for `style="..."` as object
