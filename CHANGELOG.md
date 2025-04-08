@@ -1,5 +1,10 @@
 # Changelog of `react-from-svg`
 
+## 7.1.0 - 2025-04-08
+
+- Add transform for `style="..."` as object
+- Fix support for `data-*` and `aria-*`attributes (no transformation)
+
 ## 7.0.1 - 2025-04-04
 
 - Fixed: issue with dash to camel case transforming incorrectly negative number

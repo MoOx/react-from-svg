@@ -1,7 +1,7 @@
 {
   "name": "react-from-svg",
   "description": "Transform SVG files into React components, Native and/or Web, JavaScript and TypeScript. Without shitload of dependencies.",
-  "version": "7.0.1",
+  "version": "7.1.0",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
   "type": "module",
