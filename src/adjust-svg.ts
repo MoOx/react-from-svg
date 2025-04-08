@@ -1,15 +1,22 @@
 import { toCamel, toPascal } from "./case.js";
 
+const tagsToRemove = ["title", "desc"];
+
 const cleanupStart = (svg: string): string => {
-  return svg
+  let result = svg
     .replace(/'/g, '"')
     .replace(/\sversion="1.1"/g, "")
     .replace(/<\?xml(.*)\?>/g, "")
     .replace(/\sxmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, "")
     .replace(/\sxmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/g, "")
-    .replace(/<title>(.*)<\/title>/g, "")
-    .replace(/<desc>(.*)<\/desc>/g, "")
     .replace(/<!--(.*)-->/g, "");
+
+  // Remove tags with or without attributes
+  tagsToRemove.forEach((tag) => {
+    result = result.replace(new RegExp(`<${tag}[^>]*>.*?<\/${tag}>`, "gs"), "");
+  });
+
+  return result;
 };
 
 const prepareSvgProps = (svg: string): string => {
