@@ -28,6 +28,7 @@ import type { SvgProps } from "react-native-svg";
 const SVGMatrixNegative = (props: SvgProps) => {
   return (
     <Svg viewBox="0 0 288 272" {...props}>
+      {props.children}
       <LinearGradient
         id="a"
         x1="19.028507%"

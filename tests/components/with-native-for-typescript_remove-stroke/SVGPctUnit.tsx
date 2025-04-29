@@ -28,6 +28,7 @@ import type { SvgProps } from "react-native-svg";
 const SVGPctUnit = (props: SvgProps) => {
   return (
     <Svg {...props}>
+      {props.children}
       <Circle cx="2%" cy="-4.0%" />
     </Svg>
   );

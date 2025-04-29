@@ -27,6 +27,7 @@ import Svg, {
 const SVGWithStyleAndData = (props) => {
   return (
     <Svg {...props}>
+      {props.children}
       <Mask style={{ maskType: "alpha" }} />
       <Circle cx="90" cy="90" data-circle="true" fill="black" />
     </Svg>

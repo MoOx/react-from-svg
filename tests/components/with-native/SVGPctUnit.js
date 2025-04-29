@@ -27,6 +27,7 @@ import Svg, {
 const SVGPctUnit = (props) => {
   return (
     <Svg {...props}>
+      {props.children}
       <Circle cx="2%" cy="-4.0%" />
     </Svg>
   );

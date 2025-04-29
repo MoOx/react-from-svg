@@ -32,6 +32,8 @@ const SVGSketchExport = ({
 }: SvgProps & { fills?: (ColorValue | undefined)[] }) => {
   return (
     <Svg viewBox="0 0 97 171" {...props}>
+      {props.children}
+
       <G
         id="Page-1"
         strokeWidth="1"

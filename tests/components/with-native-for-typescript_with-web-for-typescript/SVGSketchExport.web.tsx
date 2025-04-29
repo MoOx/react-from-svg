@@ -2,6 +2,8 @@ import React from "react";
 const SVGSketchExport = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 97 171" {...props}>
+      {props.children}
+
       <g
         id="Page-1"
         stroke="none"

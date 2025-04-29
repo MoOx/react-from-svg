@@ -27,6 +27,7 @@ import Svg, {
 const SVGMatrixNegative = (props) => {
   return (
     <Svg viewBox="0 0 288 272" {...props}>
+      {props.children}
       <LinearGradient
         id="a"
         x1="19.028507%"

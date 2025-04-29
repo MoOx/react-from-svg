@@ -28,6 +28,7 @@ import type { SvgProps } from "react-native-svg";
 const SVGWithFill = (props: SvgProps) => {
   return (
     <Svg viewBox="0 0 30 30" {...props}>
+      {props.children}
       <G fill="none" fillRule="evenodd">
         <Path d="m0 0h30v30h-30z" fill="#dd4b39" />
         <Path

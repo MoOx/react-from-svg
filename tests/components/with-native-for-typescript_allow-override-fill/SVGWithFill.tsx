@@ -32,6 +32,7 @@ const SVGWithFill = ({
 }: SvgProps & { fills?: (ColorValue | undefined)[] }) => {
   return (
     <Svg viewBox="0 0 30 30" {...props}>
+      {props.children}
       <G
         fill={
           typeof fills !== "undefined" && typeof fills[0] !== "undefined"

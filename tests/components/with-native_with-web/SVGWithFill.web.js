@@ -2,6 +2,7 @@ import React from "react";
 const SVGWithFill = (props) => {
   return (
     <svg viewBox="0 0 30 30" {...props}>
+      {props.children}
       <g fill="none" fillRule="evenodd">
         <path d="m0 0h30v30h-30z" fill="#dd4b39" />
         <path

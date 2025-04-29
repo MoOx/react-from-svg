@@ -27,6 +27,8 @@ import Svg, {
 const SVGSketchExport = (props) => {
   return (
     <Svg viewBox="0 0 97 171" {...props}>
+      {props.children}
+
       <G
         id="Page-1"
         stroke="none"

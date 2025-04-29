@@ -28,6 +28,7 @@ import type { SvgProps } from "react-native-svg";
 const SVGWithStyleAndData = (props: SvgProps) => {
   return (
     <Svg {...props}>
+      {props.children}
       <Mask style={{ maskType: "alpha" }} />
       <Circle cx="90" cy="90" data-circle="true" fill="black" />
     </Svg>

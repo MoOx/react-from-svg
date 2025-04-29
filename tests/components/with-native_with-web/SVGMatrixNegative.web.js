@@ -2,6 +2,7 @@ import React from "react";
 const SVGMatrixNegative = (props) => {
   return (
     <svg viewBox="0 0 288 272" {...props}>
+      {props.children}
       <linearGradient
         id="a"
         x1="19.028507%"

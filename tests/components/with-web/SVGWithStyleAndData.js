@@ -2,6 +2,7 @@ import React from "react";
 const SVGWithStyleAndData = (props) => {
   return (
     <svg {...props}>
+      {props.children}
       <mask style={{ maskType: "alpha" }} />
       <circle cx="90" cy="90" data-circle="true" fill="black" />
     </svg>

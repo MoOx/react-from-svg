@@ -27,7 +27,13 @@ const prepareSvgProps = (svg: string): string => {
 };
 
 const injectSvgJsProps = (svg: string): string => {
-  return svg.replace(">", " {...props}>");
+  // Inject {...props} and {props.children} just after the opening tag of <svg> or <Svg>
+  // 1. Inject {...props} as before
+  // 2. Immediately after, inject {props.children}
+  // This ensures that children can be injected by React
+  return svg
+    .replace(/(\{\.\.\.props\}>)/, "$1{props.children}")
+    .replace(/(>)/, " {...props}>{props.children}");
 };
 
 const dashToCamelCaseProps = (svg: string): string => {

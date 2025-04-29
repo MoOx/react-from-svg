@@ -32,6 +32,7 @@ const SVGWithStyleAndData = ({
 }: SvgProps & { fills?: (ColorValue | undefined)[] }) => {
   return (
     <Svg {...props}>
+      {props.children}
       <Mask style={{ maskType: "alpha" }} />
       <Circle
         cx="90"
