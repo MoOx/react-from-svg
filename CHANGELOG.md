@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 7.1.2 - 2025-04-29
+
+- Fix unecessary .web suffix presence for web only exports
+
 ## 7.1.1 - 2025-04-08
 
 - Fix title & desc removal if there are attributes
