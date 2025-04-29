@@ -73,6 +73,31 @@ const transformStyleAttributes = (svg: string): string => {
   });
 };
 
+// Replace each existing fill with fill={fills[N]} (N = index of occurrence)
+// If fills[N] is strictly undefined, keep the original value unless removeFill is true, then fallback to undefined
+function allowOverrideFillWithProp(
+  svg: string,
+  removeFill: boolean = false,
+): string {
+  let fillIndex = 0;
+  return svg.replace(
+    /(<(?!svg)[^\s>]+)([^>]*?)\sfill="([^"]*)"([^>]*>)/g,
+    function (
+      match: string,
+      startTag: string,
+      beforeFill: string,
+      fillValue: string,
+      afterFill: string,
+    ) {
+      const idx = fillIndex++;
+      // If removeFill: no fallback to the original value
+      // Otherwise: fallback to the original value
+      const fallback = removeFill ? "undefined" : `"${fillValue}"`;
+      return `${startTag}${beforeFill} fill={typeof fills !== 'undefined' && typeof fills[${idx}] !== 'undefined' ? fills[${idx}] : ${fallback}}${afterFill}`;
+    },
+  );
+}
+
 export {
   cleanupStart,
   prepareSvgProps,
@@ -83,4 +108,5 @@ export {
   deleteFill,
   deleteStroke,
   transformStyleAttributes,
+  allowOverrideFillWithProp,
 };

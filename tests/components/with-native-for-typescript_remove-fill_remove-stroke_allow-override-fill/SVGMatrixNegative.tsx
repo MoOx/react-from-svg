@@ -24,8 +24,12 @@ import Svg, {
   TSpan as Tspan,
   Use,
 } from "react-native-svg";
+import type { ColorValue } from "react-native";
 import type { SvgProps } from "react-native-svg";
-const SVGMatrixNegative = (props: SvgProps) => {
+const SVGMatrixNegative = ({
+  fills,
+  ...props
+}: SvgProps & { fills?: (ColorValue | undefined)[] }) => {
   return (
     <Svg viewBox="0 0 288 272" {...props}>
       <LinearGradient
@@ -50,6 +54,11 @@ const SVGMatrixNegative = (props: SvgProps) => {
       </LinearGradient>
       <Path
         d="m462.778216 3445.9274 220.369072 201.66557-243.031084 72.59684z"
+        fill={
+          typeof fills !== "undefined" && typeof fills[0] !== "undefined"
+            ? fills[0]
+            : undefined
+        }
         fillRule="evenodd"
         strokeWidth="8.170213"
         transform="matrix(.20791169 .9781476 -.9781476 .20791169 3554.703395 -1163.351461)"

@@ -36,9 +36,11 @@ Options
   --with-web-for-typescript, -rnwts     Output code for DOM with TypeScript. If --with-native is also used, will be output as .web.tsx files
   --remove-fill, -rf                    Remove all 'fill' properties from SVGs, convenient for icons
   --remove-stroke, -rs                  Remove all 'stroke' properties from SVGs, convenient for icons
+  --allow-override-fill, -aof                 Replace all 'fill' properties by a dynamic prop (fills) in SVGs, e.g. fill={fills[N]}. If fills[N] is undefined, fallback to the original value. Useful to dynamically control icon color(s).
 
 Example
   $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
+  $ react-from-svg assets/svgs src/Svgs --with-web --allow-override-fill
 ```
 
 Generated components will allow you to inject all the props you could use on an `<svg>`/`<Svg>`, such as:

@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 const optionalFlags = [
   { name: "remove-fill", alias: "rf", bool: true },
   { name: "remove-stroke", alias: "rs", bool: true },
+  { name: "allow-override-fill", alias: "aof", bool: true, value: '["#f00"]' },
 ];
 
 // Create specific core combinations as requested

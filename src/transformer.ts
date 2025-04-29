@@ -13,6 +13,7 @@ import {
   deleteFill,
   deleteStroke,
   transformStyleAttributes,
+  allowOverrideFillWithProp,
 } from "./adjust-svg.js";
 import {
   web,
@@ -33,6 +34,7 @@ type Flags = {
   withWebForTypescript?: boolean;
   removeFill?: boolean;
   removeStroke?: boolean;
+  allowOverrideFill?: boolean;
 };
 
 const get = async (globPattern: string): Promise<File[]> => {
@@ -65,11 +67,18 @@ export const transformSvg = (
   options: {
     removeFill: boolean;
     removeStroke: boolean;
+    allowOverrideFill: boolean;
     pascalCaseTag: boolean;
     template: (svg: string) => string;
   },
 ): string => {
-  const { removeFill, removeStroke, pascalCaseTag, template } = options;
+  const {
+    removeFill,
+    removeStroke,
+    allowOverrideFill,
+    pascalCaseTag,
+    template,
+  } = options;
 
   let result = cleanupStart(svg);
   result = prepareSvgProps(result);
@@ -78,6 +87,9 @@ export const transformSvg = (
   result = transformStyleAttributes(result);
   result = pascalCaseTag ? tagToPascalCase(result) : result;
   result = cleanupEndWithoutSpace(result);
+  if (allowOverrideFill) {
+    result = allowOverrideFillWithProp(result, removeFill);
+  }
   result = removeFill ? deleteFill(result) : result;
   result = removeStroke ? deleteStroke(result) : result;
 
@@ -95,6 +107,7 @@ const transformFiles = (
     withWebForTypescript: boolean;
     removeFill: boolean;
     removeStroke: boolean;
+    allowOverrideFill: boolean;
   },
 ): File[] => {
   const {
@@ -104,6 +117,7 @@ const transformFiles = (
     withWebForTypescript,
     removeFill,
     removeStroke,
+    allowOverrideFill,
   } = options;
 
   return files.reduce((acc, file) => {
@@ -112,34 +126,40 @@ const transformFiles = (
       js: boolean;
       pascalCaseTag: boolean;
       template: (svg: string) => string;
-    }) => transformSvg(file.content, { removeFill, removeStroke, ...options });
+    }) =>
+      transformSvg(file.content, {
+        removeFill,
+        removeStroke,
+        allowOverrideFill,
+        ...options,
+      });
 
     const trsfNative = () =>
       trsf({
         js: true,
         pascalCaseTag: true,
-        template: (svg) => native(svg, name),
+        template: (svg) => native(svg, name, allowOverrideFill),
       });
 
     const trsfNativeForTs = () =>
       trsf({
         js: true,
         pascalCaseTag: true,
-        template: (svg) => nativeForTypescript(svg, name),
+        template: (svg) => nativeForTypescript(svg, name, allowOverrideFill),
       });
 
     const trsfWeb = () =>
       trsf({
         js: true,
         pascalCaseTag: false,
-        template: (svg) => web(svg, name),
+        template: (svg) => web(svg, name, allowOverrideFill),
       });
 
     const trsfWebForTs = () =>
       trsf({
         js: true,
         pascalCaseTag: false,
-        template: (svg) => webForTypescript(svg, name),
+        template: (svg) => webForTypescript(svg, name, allowOverrideFill),
       });
 
     if (
@@ -210,6 +230,7 @@ export const make = async (
     withWebForTypescript: flags.withWebForTypescript ?? false,
     removeFill: flags.removeFill ?? false,
     removeStroke: flags.removeStroke ?? false,
+    allowOverrideFill: flags.allowOverrideFill ?? false,
   });
 
   console.log("Files transformed", transformedFiles.length);

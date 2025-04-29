@@ -15,6 +15,7 @@ const cli = meow(
     --with-web-for-typescript, -rnwts     Output code for DOM with TypeScript. If --with-native is also used, will be output as .web.tsx files
     --remove-fill, -rf                    Remove all 'fill' properties from SVGs, convenient for icons
     --remove-stroke, -rs                  Remove all 'stroke' properties from SVGs, convenient for icons
+    --allow-override-fill, -aof                 Replace all 'fill' properties from SVGs
 
   Example
     $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
@@ -28,6 +29,7 @@ const cli = meow(
       withWebForTypescript: { type: "boolean", shortFlag: "rnwts" },
       removeFill: { type: "boolean", shortFlag: "rf" },
       removeStroke: { type: "boolean", shortFlag: "rs" },
+      allowOverrideFill: { type: "boolean", shortFlag: "aof" },
     },
   },
 );

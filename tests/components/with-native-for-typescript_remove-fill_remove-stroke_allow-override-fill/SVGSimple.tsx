@@ -24,12 +24,21 @@ import Svg, {
   TSpan as Tspan,
   Use,
 } from "react-native-svg";
+import type { ColorValue } from "react-native";
 import type { SvgProps } from "react-native-svg";
-const SVGSimple = (props: SvgProps) => {
+const SVGSimple = ({
+  fills,
+  ...props
+}: SvgProps & { fills?: (ColorValue | undefined)[] }) => {
   return (
     <Svg viewBox="0 0 512 512" {...props}>
       <Path
         d="M336 192h40a40 40 0 0140 40v192a40 40 0 01-40 40H136a40 40 0 01-40-40V232a40 40 0 0140-40h40M336 128l-80-80-80 80M256 321V48"
+        fill={
+          typeof fills !== "undefined" && typeof fills[0] !== "undefined"
+            ? fills[0]
+            : undefined
+        }
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="32"
