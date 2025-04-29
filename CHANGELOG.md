@@ -1,8 +1,15 @@
 # Changelog of `react-from-svg`
 
+## 8.0.0 - 2025-04-29
+
+- Add new `--allow-override-fill` option
+- Add `{props.children}` injection so you can inject stuff in your svg (eg: `<defs>` that can be used with `--allow-override-fill`)
+
+Check the README for an example.
+
 ## 7.1.2 - 2025-04-29
 
-- Fix unecessary .web suffix presence for web only exports
+- Fix unnecessary `.web` suffix presence for web only exports
 
 ## 7.1.1 - 2025-04-08
 
