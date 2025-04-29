@@ -36,11 +36,10 @@ Options
   --with-web-for-typescript, -rnwts     Output code for DOM with TypeScript. If --with-native is also used, will be output as .web.tsx files
   --remove-fill, -rf                    Remove all 'fill' properties from SVGs, convenient for icons
   --remove-stroke, -rs                  Remove all 'stroke' properties from SVGs, convenient for icons
-  --allow-override-fill, -aof                 Replace all 'fill' properties by a dynamic prop (fills) in SVGs, e.g. fill={fills[N]}. If fills[N] is undefined, fallback to the original value. Useful to dynamically control icon color(s).
+  --allow-override-fill, -aof           --allow-override-fill, -aof           Replace all 'fill' properties by a dynamic prop (fills) in SVGs, e.g. fill={fills[N]}.
 
 Example
-  $ react-from-svg assets/svgs src/Svgs --with-native --remove-fill
-  $ react-from-svg assets/svgs src/Svgs --with-web --allow-override-fill
+  $ react-from-svg src/svgs src/svgs/components --with-web-for-typescript --allow-override-fill
 ```
 
 Generated components will allow you to inject all the props you could use on an `<svg>`/`<Svg>`, such as:
@@ -71,3 +70,54 @@ Need you to have:
 - [React Native](https://reactnative.dev) (or an alternative platform like
   [React Native Web](https://github.com/necolas/react-native-web))
 - [`react-native-svg`](https://github.com/react-native-community/react-native-svg)
+
+## Options
+
+### `--remove-fill`
+
+Remove all `fill` properties from SVGs, convenient for icons.
+
+### `--remove-stroke`
+
+Remove all `stroke` properties from SVGs, convenient for icons.
+
+### `--allow-override-fill`
+
+Replace all `fill` properties by a dynamic prop (fills) in SVGs, e.g. fill={fills[N]}.  
+If `fills[N]` is undefined, fallback to the original value (except if `--remove-fill` is used). Useful to dynamically control icon color(s).
+
+## Examples
+
+### Usage with `--allow-override-fill` and children
+
+When using `--allow-override-fill`, you can pass children to the component to override the fill(s).
+You can for example update a black SVG path to one using a gradient.
+
+Assuming you have a SVG in `src/svgs/logo.svg`, let's generate an SVG component :
+
+```console
+react-from-svg src/svgs src/svgs/components --with-web-for-typescript
+```
+
+You should have an SVG component in `src/svgs/components/SVGLogo.tsx`.
+
+Now let's boost this SVG component to use a gradient.
+
+```tsx
+import SVGLogo from "@/src/svgs/components/SVGLogo";
+import { colors } from "@/src/tokens.stylex"; // your colors could be just a simple object
+
+const logoGradientId = "logo-gradient-id";
+export default function LogoWithGradient() {
+  return (
+    <SVGLogo width={149} height={32} fills={[`url(#${logoGradientId})`]}>
+      <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id={logoGradientId}>
+        <stop stopColor={colors.textSecondary} offset="0%"></stop>
+        <stop stopColor={colors.textTertiary} offset="100%"></stop>
+      </linearGradient>
+    </SVGLogo>
+  );
+}
+```
+
+That's it. You started from a simple single color SVG path and ended up with a gradient SVG path.
