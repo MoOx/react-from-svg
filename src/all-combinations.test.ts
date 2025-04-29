@@ -15,19 +15,19 @@ const optionalFlags = [
 
 // Create specific core combinations as requested
 const coreCombinations = [
-  // Group 1: with-native alone
   [{ name: "with-native", alias: "rn", bool: true }],
 
-  // Group 2: with-native + with-web
+  [{ name: "with-web", alias: "rnw", bool: true }],
+
   [
     { name: "with-native", alias: "rn", bool: true },
     { name: "with-web", alias: "rnw", bool: true },
   ],
 
-  // Group 3: with-native-for-typescript alone
   [{ name: "with-native-for-typescript", alias: "rnts", bool: true }],
 
-  // Group 4: with-native-for-typescript + with-web-for-typescript
+  [{ name: "with-web-for-typescript", alias: "rnwts", bool: true }],
+
   [
     { name: "with-native-for-typescript", alias: "rnts", bool: true },
     { name: "with-web-for-typescript", alias: "rnwts", bool: true },
