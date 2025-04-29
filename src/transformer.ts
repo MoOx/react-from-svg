@@ -167,16 +167,18 @@ const transformFiles = (
       });
     }
 
+    const webExtension = withNative || withNativeForTypescript ? ".web" : "";
+
     if (withWeb) {
       newFiles.push({
-        name: file.name + ".web.js",
+        name: file.name + webExtension + ".js",
         content: trsfWeb(),
       });
     }
 
     if (withWebForTypescript) {
       newFiles.push({
-        name: file.name + ".web.tsx",
+        name: file.name + webExtension + ".tsx",
         content: trsfWebForTs(),
       });
     }
