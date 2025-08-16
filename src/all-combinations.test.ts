@@ -121,15 +121,16 @@ console.log("All combinations tested!");
 // Check if there are Git changes in the tests/components directory
 try {
   console.log("Checking for Git changes in tests/components...");
-  const gitStatus = execSync(`git status --porcelain tests/components`, {
+  const gitDiff = execSync(`git diff --ignore-cr-at-eol tests/components`, {
     encoding: "utf-8",
   });
 
-  if (gitStatus.trim()) {
+  if (gitDiff.trim()) {
     console.error(
       "❌ Error: Git changes detected in tests/components directory!",
     );
-    console.error(gitStatus);
+    console.error("\n📋 Git diff:");
+    console.error(gitDiff);
     console.error("Please commit these changes or update the expected output.");
     process.exit(1);
   }

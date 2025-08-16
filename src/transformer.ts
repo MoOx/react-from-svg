@@ -38,7 +38,7 @@ type Flags = {
 };
 
 const get = async (globPattern: string): Promise<File[]> => {
-  const files = await glob(globPattern);
+  const files = await glob(globPattern.replace(/\\/g, '/'), { posix: true });
   return files
     .sort()
     .reverse()
@@ -59,8 +59,6 @@ const shortenFilenames = (sourcePath: string, files: File[]): File[] => {
       .join("/"),
   }));
 };
-
-const noop = (s: string): string => s;
 
 export const transformSvg = (
   svg: string,
