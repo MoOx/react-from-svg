@@ -4,6 +4,10 @@
   "version": "8.0.0",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-from-svg",
+  "author": {
+    "name": "Maxime Thirouin",
+    "url": "https://github.com/MoOx"
+  },
   "type": "module",
   "exports": "./dist/bin.js",
   "keywords": [

@@ -7,10 +7,11 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/MoOx/react-from-svg) ![npm downloads](https://img.shields.io/npm/dm/react-from-svg)](https://www.npmjs.com/package/react-from-svg)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MoOx/react-from-svg/build.yml?branch=main)](https://github.com/MoOx/react-from-svg/actions)
 [![License](https://img.shields.io/github/license/MoOx/react-from-svg)](https://github.com/MoOx/react-from-svg)  
-[![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=Follow%20me)](https://github.com/MoOx)
-[![LinkedIn Follow](https://img.shields.io/badge/Follow%20Me-on%20LinkedIn-gray?style=social&logo=invision&logoColor=%230077B5)](https://www.linkedin.com/in/maxthirouin/)
-[![BlueSky Follow](https://img.shields.io/badge/Follow%20Me-on%20BlueSky-gray?style=social&logo=bluesky)](https://bsky.app/profile/moox.io)
-[![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://x.com/MoOx)
+![My website moox.io](https://img.shields.io/badge/%F0%9F%8C%8D%20-https%3A%2F%2Fmoox.io-gray?style=social)
+[![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=GitHub)](https://github.com/MoOx)
+[![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-%20?style=social&logo=invision&logoColor=%230077B5)](https://www.linkedin.com/in/maxthirouin/)
+[![BlueSky Follow](https://img.shields.io/badge/BlueSky-%20?style=social&logo=bluesky)](https://bsky.app/profile/moox.io)
+[![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=)](https://x.com/MoOx)
 
 > Transform SVG files into React components, Native and/or Web, JavaScript and/or TypeScript.
 > Without minimal dependencies.
