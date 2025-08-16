@@ -1,5 +1,9 @@
 # Changelog of `react-from-svg`
 
+## 8.0.1 - 2025-09-16
+
+- Fix for Windows support
+
 ## 8.0.0 - 2025-04-29
 
 - Add new `--allow-override-fill` option
