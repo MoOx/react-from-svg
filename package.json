@@ -20,9 +20,6 @@
     "svgr-cli",
     "svgr"
   ],
-  "engines": {
-    "node": "^22.0.0"
-  },
   "bin": {
     "react-from-svg": "./dist/bin.js"
   },
